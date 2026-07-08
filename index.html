@@ -1,841 +1,852 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AURA // Premium Artisan Marketplace</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        slate: {
-                            950: '#0b0f19',
-                        },
-                        gold: {
-                            50: '#fbf7ee',
-                            100: '#f4eada',
-                            200: '#e8d1b1',
-                            300: '#dbb483',
-                            400: '#cf9659',
-                            500: '#c27b37',
-                            600: '#a6622b',
-                            700: '#8a4d24',
-                            800: '#6e3c20',
-                            900: '#56301c',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        .glassmorphism {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .dark-glass {
-            background: rgba(11, 15, 25, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-        }
-        .product-card:hover .product-image {
-            transform: scale(1.06);
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-        }
-        .scrollbar-hide {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>নবীজির শিক্ষা — হাদিস শরিফ</title>
+<style>
+    :root {
+        --bg: #f4f1ea;
+        --card: #ffffff;
+        --primary: #1a6b54;
+        --primary-dark: #124d3d;
+        --primary-light: #e3f0eb;
+        --accent: #c8a15a;
+        --text: #2c2c2c;
+        --text-soft: #6b6b6b;
+        --border: #e5e0d5;
+        --arabic-bg: #fbf9f3;
+        --shadow: 0 4px 20px rgba(0,0,0,0.06);
+        --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+    }
+    [data-theme="dark"] {
+        --bg: #14181a;
+        --card: #1e2427;
+        --primary: #4db89a;
+        --primary-dark: #3a9a80;
+        --primary-light: #24332e;
+        --accent: #d4b878;
+        --text: #e8e6e0;
+        --text-soft: #9aa0a0;
+        --border: #2c3438;
+        --arabic-bg: #242b2e;
+        --shadow: 0 4px 20px rgba(0,0,0,0.3);
+        --shadow-lg: 0 10px 40px rgba(0,0,0,0.5);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    body {
+        font-family: 'Noto Sans Bengali', 'Hind Siliguri', 'Segoe UI', Tahoma, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.7;
+        transition: background 0.3s, color 0.3s;
+        padding-bottom: 80px;
+    }
+
+    .arabic {
+        font-family: 'Amiri', 'Traditional Arabic', 'Scheherazade New', serif;
+        direction: rtl;
+        font-size: 1.7rem;
+        line-height: 2.2;
+        color: var(--primary-dark);
+        text-align: right;
+    }
+    [data-theme="dark"] .arabic { color: var(--primary); }
+
+    /* Header */
+    header {
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: #fff;
+        padding: 20px 16px 18px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: var(--shadow);
+    }
+    .header-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    .header-title h1 {
+        font-size: 1.35rem;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+    }
+    .header-title p {
+        font-size: 0.78rem;
+        opacity: 0.85;
+        margin-top: 2px;
+    }
+    .theme-btn {
+        background: rgba(255,255,255,0.15);
+        border: none;
+        color: #fff;
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        font-size: 1.3rem;
+        cursor: pointer;
+        transition: background 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .theme-btn:active { background: rgba(255,255,255,0.3); }
+
+    /* Search */
+    .search-wrap {
+        max-width: 800px;
+        margin: 14px auto 0;
+        position: relative;
+    }
+    .search-box {
+        width: 100%;
+        padding: 12px 44px 12px 16px;
+        border-radius: 14px;
+        border: none;
+        font-size: 0.95rem;
+        font-family: inherit;
+        background: rgba(255,255,255,0.95);
+        color: #2c2c2c;
+        outline: none;
+    }
+    .search-icon {
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--primary);
+        font-size: 1.1rem;
+    }
+
+    /* Container */
+    .container { max-width: 800px; margin: 0 auto; padding: 0 12px; }
+
+    /* Daily Hadith */
+    .daily-card {
+        margin: 16px auto 0;
+        background: linear-gradient(135deg, #1a6b54, #124d3d);
+        color: #fff;
+        border-radius: 20px;
+        padding: 20px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: var(--shadow-lg);
+    }
+    .daily-card::before {
+        content: "﷽";
+        position: absolute;
+        left: -10px;
+        bottom: -30px;
+        font-size: 7rem;
+        opacity: 0.06;
+        font-family: 'Amiri', serif;
+    }
+    .daily-label {
+        display: inline-block;
+        background: var(--accent);
+        color: #3a2c10;
+        font-size: 0.72rem;
+        font-weight: 700;
+        padding: 4px 12px;
+        border-radius: 20px;
+        margin-bottom: 12px;
+    }
+    .daily-card .arabic {
+        color: #fff;
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+    .daily-card .bn { font-size: 0.98rem; opacity: 0.95; }
+    .daily-card .ref { font-size: 0.78rem; opacity: 0.75; margin-top: 8px; }
+
+    /* Category chips */
+    .chips {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding: 16px 12px 8px;
+        max-width: 800px;
+        margin: 0 auto;
+        scrollbar-width: none;
+    }
+    .chips::-webkit-scrollbar { display: none; }
+    .chip {
+        flex-shrink: 0;
+        padding: 8px 16px;
+        border-radius: 20px;
+        background: var(--card);
+        border: 1.5px solid var(--border);
+        color: var(--text-soft);
+        font-size: 0.85rem;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: all 0.2s;
+        font-family: inherit;
+    }
+    .chip.active {
+        background: var(--primary);
+        color: #fff;
+        border-color: var(--primary);
+    }
+
+    /* Stats bar */
+    .stats {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 6px 4px 12px;
+        font-size: 0.8rem;
+        color: var(--text-soft);
+    }
+
+    /* Hadith card */
+    .hadith-card {
+        background: var(--card);
+        border-radius: 18px;
+        padding: 20px;
+        margin-bottom: 14px;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+        animation: fadeIn 0.4s ease;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .card-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 14px;
+    }
+    .num-badge {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .num-circle {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        background: var(--primary-light);
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.9rem;
+    }
+    .cat-tag {
+        font-size: 0.75rem;
+        color: var(--accent);
+        font-weight: 600;
+        background: var(--primary-light);
+        padding: 4px 10px;
+        border-radius: 8px;
+    }
+    .fav-btn {
+        background: none;
+        border: none;
+        font-size: 1.4rem;
+        cursor: pointer;
+        color: var(--text-soft);
+        transition: transform 0.2s;
+        padding: 2px;
+    }
+    .fav-btn.active { color: #e0524a; }
+    .fav-btn:active { transform: scale(1.3); }
+
+    .arabic-block {
+        background: var(--arabic-bg);
+        border-radius: 12px;
+        padding: 16px;
+        margin-bottom: 14px;
+        border-right: 3px solid var(--accent);
+    }
+    .bn-text {
+        font-size: 1.02rem;
+        color: var(--text);
+        margin-bottom: 10px;
+    }
+    .en-text {
+        font-size: 0.88rem;
+        color: var(--text-soft);
+        font-style: italic;
+        font-family: 'Segoe UI', sans-serif;
+        line-height: 1.6;
+        border-top: 1px dashed var(--border);
+        padding-top: 10px;
+        margin-top: 4px;
+    }
+    .ref-badge {
+        display: inline-block;
+        margin-top: 10px;
+        font-size: 0.78rem;
+        color: var(--primary);
+        background: var(--primary-light);
+        padding: 4px 12px;
+        border-radius: 8px;
+        font-weight: 600;
+    }
+    .note-text {
+        font-size: 0.9rem;
+        color: var(--text-soft);
+        background: var(--primary-light);
+        padding: 12px;
+        border-radius: 10px;
+        margin-top: 12px;
+    }
+
+    .empty {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--text-soft);
+    }
+    .empty span { font-size: 3rem; display: block; margin-bottom: 12px; }
+
+    /* Bottom nav */
+    .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: var(--card);
+        border-top: 1px solid var(--border);
+        display: flex;
+        justify-content: space-around;
+        padding: 8px 0 max(8px, env(safe-area-inset-bottom));
+        z-index: 100;
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
+    }
+    .nav-item {
+        background: none;
+        border: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        color: var(--text-soft);
+        font-size: 0.7rem;
+        font-family: inherit;
+        cursor: pointer;
+        padding: 4px 16px;
+        border-radius: 12px;
+        transition: color 0.2s;
+    }
+    .nav-item .ic { font-size: 1.35rem; }
+    .nav-item.active { color: var(--primary); }
+
+    /* Toast */
+    .toast {
+        position: fixed;
+        bottom: 90px;
+        left: 50%;
+        transform: translateX(-50%) translateY(100px);
+        background: var(--primary-dark);
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 30px;
+        font-size: 0.85rem;
+        opacity: 0;
+        transition: all 0.3s;
+        z-index: 200;
+        white-space: nowrap;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+    /* About modal */
+    .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.5);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 300;
+        padding: 20px;
+    }
+    .modal-overlay.show { display: flex; }
+    .modal {
+        background: var(--card);
+        border-radius: 20px;
+        padding: 24px;
+        max-width: 420px;
+        width: 100%;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+    .modal h2 { color: var(--primary); font-size: 1.2rem; margin-bottom: 12px; }
+    .modal p { font-size: 0.9rem; margin-bottom: 8px; color: var(--text-soft); }
+    .modal .close-btn {
+        margin-top: 16px;
+        width: 100%;
+        padding: 12px;
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        font-size: 0.95rem;
+        font-family: inherit;
+        cursor: pointer;
+    }
+    .modal-info-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid var(--border);
+        font-size: 0.88rem;
+    }
+    .modal-info-row span:first-child { color: var(--text-soft); }
+    .modal-info-row span:last-child { font-weight: 600; }
+
+    @media (min-width: 600px) {
+        .arabic { font-size: 1.9rem; }
+        .header-title h1 { font-size: 1.6rem; }
+    }
+</style>
 </head>
-<body class="bg-gray-50 text-slate-950 font-sans antialiased overflow-x-hidden">
-
-    <div class="bg-slate-950 text-gold-200 text-xs tracking-widest uppercase py-2 px-4 text-center font-medium sticky top-0 z-50 border-b border-gold-900/20">
-        Complimentary global shipping on orders over $150 // Use code <span class="text-white font-bold">AURA10</span>
+<body>
+<header>
+    <div class="header-top">
+        <div class="header-title">
+            <h1>নবীজির শিক্ষা <span style="font-family:'Amiri',serif;font-size:0.9em">ﷺ</span></h1>
+            <p>হাদিস শরিফ সংকলন — <span id="totalCount">১৮২</span>টি হাদিস</p>
+        </div>
+        <button class="theme-btn" id="themeBtn" title="থিম পরিবর্তন">🌙</button>
     </div>
-
-    <header class="glassmorphism sticky top-8 z-40 mx-auto max-w-7xl rounded-2xl shadow-sm transition-all duration-300 my-2 px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-20">
-            <div class="flex-shrink-0 flex items-center">
-                <a href="#" class="text-2xl font-bold tracking-widest text-slate-950 flex items-center gap-2">
-                    <span class="bg-slate-950 text-white px-2.5 py-1 rounded-lg text-lg">A</span>
-                    AURA
-                </a>
-            </div>
-
-            <nav class="hidden md:flex space-x-8 font-medium text-sm tracking-wide text-slate-700">
-                <a href="#" class="text-slate-950 border-b-2 border-slate-950 pb-1">Home</a>
-                <a href="#shop" class="hover:text-slate-950 transition-colors duration-200 pb-1">Shop</a>
-                <a href="#categories" class="hover:text-slate-950 transition-colors duration-200 pb-1">Categories</a>
-                <a href="#about" class="hover:text-slate-950 transition-colors duration-200 pb-1">Our Story</a>
-            </nav>
-
-            <div class="flex items-center space-x-4 lg:space-x-6">
-                <div class="relative hidden sm:block w-48 lg:w-64">
-                    <input type="text" id="search-input" placeholder="Search curated goods..." class="w-full bg-gray-100 border border-gray-200 text-xs rounded-full pl-10 pr-4 py-2 focus:outline-none focus:ring-1 focus:ring-slate-950 focus:bg-white transition-all duration-300">
-                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
-                </div>
-
-                <button onclick="toggleWishlistModal()" class="relative text-slate-700 hover:text-slate-950 transition-colors py-2">
-                    <i class="fa-regular fa-heart text-xl"></i>
-                    <span id="wishlist-count" class="absolute -top-1 -right-2 bg-amber-600 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold scale-0 transition-transform duration-300">0</span>
-                </button>
-
-                <button id="cart-btn" class="relative text-slate-700 hover:text-slate-950 transition-colors py-2">
-                    <i class="fa-solid fa-bag-shopping text-xl"></i>
-                    <span id="cart-count" class="absolute -top-1 -right-2 bg-slate-950 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
-                </button>
-
-                <button class="text-slate-700 hover:text-slate-950 transition-colors md:hidden" id="mobile-menu-btn">
-                    <i class="fa-solid fa-bars text-xl"></i>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <div id="mobile-menu" class="fixed inset-0 z-50 bg-slate-950/40 backdrop-blur-md hidden transition-all duration-300">
-        <div class="bg-white w-3/4 max-w-xs h-full p-6 shadow-2xl flex flex-col justify-between">
-            <div>
-                <div class="flex items-center justify-between mb-8">
-                    <span class="text-xl font-bold tracking-widest text-slate-950">AURA</span>
-                    <button id="mobile-menu-close" class="text-slate-950"><i class="fa-solid fa-xmark text-xl"></i></button>
-                </div>
-                <div class="flex flex-col space-y-4 font-medium text-lg">
-                    <a href="#" class="text-slate-950 border-l-4 border-slate-950 pl-2">Home</a>
-                    <a href="#shop" class="text-slate-600 hover:text-slate-950 pl-2">Shop</a>
-                    <a href="#categories" class="text-slate-600 hover:text-slate-950 pl-2">Categories</a>
-                    <a href="#about" class="text-slate-600 hover:text-slate-950 pl-2">Our Story</a>
-                </div>
-            </div>
-            <div class="border-t border-gray-100 pt-6">
-                <p class="text-xs text-gray-500">Contact Support</p>
-                <p class="text-sm font-semibold text-slate-950 mt-1">concierge@auramarket.com</p>
-            </div>
-        </div>
+    <div class="search-wrap">
+        <input type="text" class="search-box" id="searchBox" placeholder="হাদিস খুঁজুন (বাংলা / ইংরেজি / বিষয়)...">
+        <span class="search-icon">🔍</span>
     </div>
+</header>
 
-    <main>
-        <section class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 my-6">
-            <div class="relative rounded-3xl overflow-hidden bg-slate-900 h-[500px] md:h-[620px] shadow-xl">
-                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80" alt="Hero Banner" class="absolute inset-0 w-full h-full object-cover object-center opacity-65 transform scale-100 transition-transform duration-[10000ms]" id="hero-bg">
-                
-                <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/60 to-transparent"></div>
+<div class="chips" id="chips"></div>
 
-                <div class="absolute inset-0 flex items-center px-6 sm:px-12 md:px-20 lg:px-24">
-                    <div class="max-w-xl text-white">
-                        <span class="inline-block px-3 py-1 bg-gold-500/20 border border-gold-400/30 rounded-full text-gold-300 text-xs uppercase tracking-widest font-semibold mb-6 animate-pulse">
-                            The Autumn Collective 2026
-                        </span>
-                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-6">
-                            Elevate your everyday aesthetic.
-                        </h1>
-                        <p class="text-base sm:text-lg text-gray-300 font-light leading-relaxed mb-10 max-w-md">
-                            Experience meticulously engineered minimalist apparel, precision tech integration accessories, and high-fidelity lifestyle assets.
-                        </p>
-                        <div class="flex flex-col sm:flex-row gap-4">
-                            <a href="#shop" class="inline-flex items-center justify-center px-8 py-4 bg-white text-slate-950 font-semibold rounded-xl hover:bg-gold-100 transition-all duration-300 group shadow-lg hover:shadow-xl">
-                                Discover Collection
-                                <i class="fa-solid fa-arrow-right ml-2.5 text-xs transform group-hover:translate-x-1 transition-transform"></i>
-                            </a>
-                            <a href="#categories" class="inline-flex items-center justify-center px-8 py-4 border border-white/30 backdrop-blur-sm text-white font-semibold rounded-xl hover:bg-white/10 transition-all duration-300">
-                                Browse Categories
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
-                <div class="flex items-start gap-4">
-                    <div class="p-3 bg-gold-50 text-gold-600 rounded-xl"><i class="fa-solid fa-truck-fast text-xl"></i></div>
-                    <div>
-                        <h4 class="font-semibold text-slate-950 text-sm">Insured Global Delivery</h4>
-                        <p class="text-xs text-gray-500 mt-1">Expedited shipping options worldwide.</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-4">
-                    <div class="p-3 bg-gold-50 text-gold-600 rounded-xl"><i class="fa-solid fa-shield-halved text-xl"></i></div>
-                    <div>
-                        <h4 class="font-semibold text-slate-950 text-sm">Quantum-Secure Checkout</h4>
-                        <p class="text-xs text-gray-500 mt-1">256-bit dynamic encryption protocols.</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-4">
-                    <div class="p-3 bg-gold-50 text-gold-600 rounded-xl"><i class="fa-solid fa-rotate-left text-xl"></i></div>
-                    <div>
-                        <h4 class="font-semibold text-slate-950 text-sm">90-Day Standard Return</h4>
-                        <p class="text-xs text-gray-500 mt-1">Hassle-free dynamic return policy.</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-4">
-                    <div class="p-3 bg-gold-50 text-gold-600 rounded-xl"><i class="fa-solid fa-headset text-xl"></i></div>
-                    <div>
-                        <h4 class="font-semibold text-slate-950 text-sm">Concierge Customer Desk</h4>
-                        <p class="text-xs text-gray-500 mt-1">24/7 dedicated live human assistance.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="categories" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 scroll-mt-24">
-            <div class="flex flex-col md:flex-row items-start md:items-end justify-between mb-10 gap-4">
-                <div>
-                    <span class="text-xs font-bold uppercase tracking-widest text-gold-600">Curated Architecture</span>
-                    <h2 class="text-3xl font-bold tracking-tight text-slate-950 mt-1">Shop by Category Matrix</h2>
-                </div>
-                <p class="text-sm text-gray-500 max-w-md">Precision crafted design paradigms mapped into categorical perfection. Select your lifestyle domain.</p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="group relative rounded-2xl overflow-hidden h-72 shadow-sm cursor-pointer" onclick="filterCategory('Apparel')">
-                    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=600&q=80" alt="Apparel" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
-                    <div class="absolute inset-0 p-6 flex flex-col justify-end">
-                        <span class="text-xs text-gold-300 font-semibold tracking-widest uppercase mb-1">Tailored Goods</span>
-                        <h3 class="text-xl font-bold text-white tracking-wide">Minimalist Apparel</h3>
-                    </div>
-                </div>
-                <div class="group relative rounded-2xl overflow-hidden h-72 shadow-sm cursor-pointer" onclick="filterCategory('Electronics')">
-                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80" alt="Electronics" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
-                    <div class="absolute inset-0 p-6 flex flex-col justify-end">
-                        <span class="text-xs text-gold-300 font-semibold tracking-widest uppercase mb-1">High Fidelity</span>
-                        <h3 class="text-xl font-bold text-white tracking-wide">Premium Audio</h3>
-                    </div>
-                </div>
-                <div class="group relative rounded-2xl overflow-hidden h-72 shadow-sm cursor-pointer" onclick="filterCategory('Accessories')">
-                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" alt="Accessories" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
-                    <div class="absolute inset-0 p-6 flex flex-col justify-end">
-                        <span class="text-xs text-gold-300 font-semibold tracking-widest uppercase mb-1">Everyday carry</span>
-                        <h3 class="text-xl font-bold text-white tracking-wide">Elite Accessories</h3>
-                    </div>
-                </div>
-                <div class="group relative rounded-2xl overflow-hidden h-72 shadow-sm cursor-pointer" onclick="filterCategory('Footwear')">
-                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80" alt="Footwear" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
-                    <div class="absolute inset-0 p-6 flex flex-col justify-end">
-                        <span class="text-xs text-gold-300 font-semibold tracking-widest uppercase mb-1">Ergonomic Forms</span>
-                        <h3 class="text-xl font-bold text-white tracking-wide">Avant Footwear</h3>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="shop" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 scroll-mt-24">
-            <div class="flex flex-col md:flex-row items-start md:items-end justify-between mb-10 gap-4">
-                <div>
-                    <span class="text-xs font-bold uppercase tracking-widest text-gold-600">The Vault</span>
-                    <h2 class="text-3xl font-bold tracking-tight text-slate-950 mt-1">Featured Artifacts</h2>
-                </div>
-                
-                <div class="flex flex-wrap gap-2 text-xs font-semibold tracking-wider uppercase">
-                    <button id="filter-all" onclick="filterCategory('all')" class="px-5 py-2.5 rounded-full bg-slate-950 text-white shadow-sm transition-all duration-300">All Goods</button>
-                    <button id="filter-apparel" onclick="filterCategory('Apparel')" class="px-5 py-2.5 rounded-full bg-white text-slate-600 border border-gray-200 hover:border-slate-950 hover:text-slate-950 transition-all duration-300">Apparel</button>
-                    <button id="filter-electronics" onclick="filterCategory('Electronics')" class="px-5 py-2.5 rounded-full bg-white text-slate-600 border border-gray-200 hover:border-slate-950 hover:text-slate-950 transition-all duration-300">Audio</button>
-                    <button id="filter-accessories" onclick="filterCategory('Accessories')" class="px-5 py-2.5 rounded-full bg-white text-slate-600 border border-gray-200 hover:border-slate-950 hover:text-slate-950 transition-all duration-300">Accessories</button>
-                    <button id="filter-footwear" onclick="filterCategory('Footwear')" class="px-5 py-2.5 rounded-full bg-white text-slate-600 border border-gray-200 hover:border-slate-950 hover:text-slate-950 transition-all duration-300">Footwear</button>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10" id="product-grid">
-                </div>
-        </section>
-
-        <section id="about" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 scroll-mt-24">
-            <div class="relative bg-slate-950 text-white rounded-3xl overflow-hidden p-8 sm:p-12 lg:p-16 shadow-xl">
-                <div class="absolute -top-24 -right-24 w-96 h-96 bg-gold-600/10 rounded-full blur-3xl"></div>
-                <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-slate-800/40 rounded-full blur-3xl"></div>
-
-                <div class="relative max-w-3xl mx-auto text-center">
-                    <span class="text-xs font-bold uppercase tracking-widest text-gold-400">Join the Circle</span>
-                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mt-3 mb-6">Unlock Access to Private Editions</h2>
-                    <p class="text-gray-400 font-light text-base sm:text-lg mb-10 max-w-xl mx-auto leading-relaxed">
-                        Subscribe to get early allocations of custom engineering drops, seasonal collection catalogs, and private member pricing matrix.
-                    </p>
-                    
-                    <form id="newsletter-form" class="max-w-md mx-auto sm:flex gap-3">
-                        <div class="relative flex-grow">
-                            <input type="email" id="newsletter-email" required placeholder="Enter your professional email" class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-sm text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-gold-400 focus:border-gold-400 focus:bg-white/10 transition-all duration-300">
-                        </div>
-                        <button type="submit" class="w-full sm:w-auto mt-3 sm:mt-0 px-8 py-4 bg-white text-slate-950 font-semibold rounded-xl hover:bg-gold-100 transition-colors duration-300 flex items-center justify-center gap-2 flex-shrink-0 text-sm">
-                            Subscribe
-                            <i class="fa-solid fa-paper-plane text-xs"></i>
-                        </button>
-                    </form>
-                    <p id="newsletter-success" class="text-emerald-400 text-xs font-medium mt-3 hidden"><i class="fa-solid fa-circle-check mr-1.5"></i> Verification link successfully dispatched to infrastructure.</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="bg-white border-t border-gray-100">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
-                <div class="lg:col-span-2">
-                    <a href="#" class="text-2xl font-bold tracking-widest text-slate-950 flex items-center gap-2 mb-6">
-                        <span class="bg-slate-950 text-white px-2.5 py-1 rounded-lg text-lg">A</span>
-                        AURA
-                    </a>
-                    <p class="text-sm text-gray-500 max-w-sm font-light leading-relaxed mb-6">
-                        Premium engineering embedded gracefully into sustainable architecture, curated apparel, and timeless digital lifecycles.
-                    </p>
-                    <div class="flex space-x-4 text-gray-400">
-                        <a href="#" class="hover:text-slate-950 transition-colors"><i class="fa-brands fa-instagram text-lg"></i></a>
-                        <a href="#" class="hover:text-slate-950 transition-colors"><i class="fa-brands fa-x-twitter text-lg"></i></a>
-                        <a href="#" class="hover:text-slate-950 transition-colors"><i class="fa-brands fa-pinterest text-lg"></i></a>
-                        <a href="#" class="hover:text-slate-950 transition-colors"><i class="fa-brands fa-linkedin text-lg"></i></a>
-                    </div>
-                </div>
-
-                <div>
-                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-950 mb-4">Market Engine</h3>
-                    <ul class="space-y-3 text-sm text-gray-500 font-light">
-                        <li><a href="#shop" class="hover:text-slate-950 transition-colors">All Products</a></li>
-                        <li><a href="#" class="hover:text-slate-950 transition-colors">Seasonal Releases</a></li>
-                        <li><a href="#" class="hover:text-slate-950 transition-colors">Custom Hardware</a></li>
-                        <li><a href="#" class="hover:text-slate-950 transition-colors">Collaborations</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-950 mb-4">Governance</h3>
-                    <ul class="space-y-3 text-sm text-gray-500 font-light">
-                        <li><a href="#" class="hover:text-slate-950 transition-colors">Our Ethos</a></li>
-                        <li><a href="#" class="hover:text-slate-950 transition-colors">Sustainability Protocol</a></li>
-                        <li><a href="#" class="hover:text-slate-950 transition-colors">Careers Matrix</a></li>
-                        <li><a href="#" class="hover:text-slate-950 transition-colors">Press Portfolio</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-950 mb-4">Support & Care</h3>
-                    <ul class="space-y-3 text-sm text-gray-500 font-light">
-                        <li><a href="#" class="hover:text-slate-950 transition-colors">Concierge Desk</a></li>
-                        <li><a href="#" class="hover:text-slate-950 transition-colors">Shipping Matrix</a></li>
-                        <li><a href="#" class="hover:text-slate-950 transition-colors">Returns & Refunds</a></li>
-                        <li><a href="#" class="hover:text-slate-950 transition-colors">Infrastructure Status</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="border-t border-gray-100 mt-16 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-400">
-                <p>&copy; 2026 AURA Lab Corp. Designed for multi-variant system environments.</p>
-                <div class="flex space-x-6">
-                    <a href="#" class="hover:text-slate-950 transition-colors">Privacy Paradigm</a>
-                    <a href="#" class="hover:text-slate-950 transition-colors">Terms of Operations</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden hidden">
-        <div class="absolute inset-0 bg-slate-950/40 backdrop-blur-sm transition-opacity opacity-0 duration-300" id="cart-overlay"></div>
-        <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
-            <div class="w-screen max-w-md transform translate-x-full transition-transform duration-300 ease-in-out bg-white flex flex-col shadow-2xl" id="cart-panel">
-                
-                <div class="p-6 border-b border-gray-100 flex items-center justify-between">
-                    <h2 class="text-lg font-bold text-slate-950 tracking-wide flex items-center gap-2">
-                        <i class="fa-solid fa-bag-shopping text-gold-600"></i>
-                        Your Allocation (<span id="cart-panel-count">0</span>)
-                    </h2>
-                    <button id="cart-close-btn" class="text-slate-400 hover:text-slate-950 transition-colors p-2">
-                        <i class="fa-solid fa-xmark text-xl"></i>
-                    </button>
-                </div>
-
-                <div class="flex-1 overflow-y-auto p-6 space-y-6 scrollbar-hide" id="cart-items-container">
-                    </div>
-
-                <div class="p-6 border-t border-gray-100 bg-gray-50">
-                    <div class="flex justify-between text-sm text-gray-500 mb-2">
-                        <span>Standard Subtotal</span>
-                        <span id="cart-subtotal" class="font-semibold text-slate-950">$0.00</span>
-                    </div>
-                    <div class="flex justify-between text-sm text-gray-500 mb-6">
-                        <span>Shipping Logistics</span>
-                        <span class="text-emerald-600 font-medium font-mono text-xs uppercase bg-emerald-50 px-2 py-0.5 rounded">Complimentary</span>
-                    </div>
-                    <button onclick="triggerCheckoutPipeline()" class="w-full bg-slate-950 text-white font-semibold py-4 rounded-xl hover:bg-gold-600 tracking-wide transition-colors duration-300 shadow-md flex items-center justify-center gap-3">
-                        Proceed to Secure Settlement
-                        <i class="fa-solid fa-lock text-xs text-gold-300"></i>
-                    </button>
-                    <button id="cart-continue-shopping" class="w-full text-center text-xs text-gray-500 font-medium mt-4 hover:text-slate-950 transition-colors">
-                        Continue browsing engine
-                    </button>
-                </div>
-            </div>
-        </div>
+<div class="container">
+    <div id="dailyContainer"></div>
+    <div class="stats">
+        <span id="showingCount"></span>
+        <span id="viewLabel"></span>
     </div>
+    <div id="hadithList"></div>
+</div>
 
-    <div id="quickview-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
-        <div class="bg-white rounded-3xl overflow-hidden max-w-3xl w-full shadow-2xl relative transform scale-95 transition-transform duration-300" id="quickview-panel">
-            <button onclick="closeQuickView()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-950 transition-colors z-10 w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center border border-gray-100 shadow-sm">
-                <i class="fa-solid fa-xmark text-sm"></i>
-            </button>
-            <div class="grid grid-cols-1 md:grid-cols-2">
-                <div class="bg-gray-100 h-64 md:h-[400px] relative">
-                    <img id="qv-image" src="" alt="Artifact image" class="w-full h-full object-cover">
-                    <span id="qv-badge" class="absolute top-4 left-4 bg-slate-950 text-white text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 rounded"></span>
+<nav class="bottom-nav">
+    <button class="nav-item active" data-view="all"><span class="ic">📖</span>সব হাদিস</button>
+    <button class="nav-item" data-view="daily"><span class="ic">☀️</span>আজকের</button>
+    <button class="nav-item" data-view="fav"><span class="ic">❤️</span>প্রিয়</button>
+    <button class="nav-item" data-view="about"><span class="ic">ℹ️</span>পরিচিতি</button>
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<div class="modal-overlay" id="aboutModal">
+    <div class="modal">
+        <h2>বই পরিচিতি</h2>
+        <div class="modal-info-row"><span>বইয়ের নাম</span><span>নবীজির শিক্ষা</span></div>
+        <div class="modal-info-row"><span>উপশিরোনাম</span><span>হাদিস শরিফ</span></div>
+        <div class="modal-info-row"><span>লেখক</span><span>মুহাম্মদ আতীক উল্লাহ</span></div>
+        <div class="modal-info-row"><span>প্রকাশক</span><span>মাওলানা ওবায়দুল্লাহ আযহারী</span></div>
+        <div class="modal-info-row"><span>প্রকাশনায়</span><span>মাকতাবাতুল আযহার</span></div>
+        <div class="modal-info-row"><span>প্রকাশকাল</span><span>মে ২০২৬ (যিলক্বদ ১৪৪৭ হি.)</span></div>
+        <div class="modal-info-row"><span>মোট হাদিস</span><span>১৮২টি</span></div>
+        <p style="margin-top:16px;line-height:1.7;">এই অ্যাপটি "নবীজির শিক্ষা" বই অবলম্বনে তৈরি একটি ডিজিটাল সংস্করণ। প্রতিটি হাদিসের আরবি মূল, বাংলা অনুবাদ, ইংরেজি অনুবাদ ও রেফারেন্স রয়েছে।</p>
+        <p style="font-style:italic;color:var(--primary);">রাসূলুল্লাহ ﷺ বলেছেন: "আমার পক্ষ থেকে একটি আয়াত হলেও পৌঁছে দাও।" (বুখারি: ৩৪৬১)</p>
+        <button class="close-btn" onclick="closeAbout()">বন্ধ করুন</button>
+    </div>
+</div>
+
+<script>
+// ============ HADITH DATA ============
+const hadiths = [
+{n:1,cat:"তাওহিদ",ar:"اُعْبُدُوا اللهَ وَحْدَهُ",bn:"ইবাদত করো একমাত্র আল্লাহর।",en:"Worship Allah alone.",ref:"বুখারি: ৭"},
+{n:2,cat:"নিয়ত",ar:"اِنَّمَا الْاَعْمَالُ بِالنِّيَّاتِ وَاِنَّمَا لِكُلِّ امْرِئٍ مَا نَوٰى",bn:"আমলসমূহ (কাজ যথাযথ) নিয়তের ওপর নির্ভরশীল। প্রতিটি মানুষ যা নিয়ত করে তাই পায়।",en:"The reward of deeds depends upon the intentions and a man will have only what he intended.",ref:"বুখারি: ১"},
+{n:3,cat:"আমল",ar:"اِنَّمَا الْاَعْمَالُ بِالْخَوَاتِيْمِ",bn:"নিশ্চয়ই মানুষের আমল (তা যথাযথ) শেষ আমলের ওপর নির্ভরশীল।",en:"Indeed, deeds are judged by their endings.",ref:"বুখারি: ৬৬০৭"},
+{n:4,cat:"দ্বীন",ar:"الدِّيْنُ النَّصِيْحَةُ",bn:"দ্বীন হলো (সবার জন্য) একনিষ্ঠ কল্যাণকামিতার নাম।",en:"The religion (of Islam) is sincere advice and well-wishing.",ref:"মুসলিম: ৫৫"},
+{n:5,cat:"দ্বীন",ar:"اِنَّ الدِّيْنَ يُسْرٌ",bn:"দ্বীন অত্যন্ত সহজ।",en:"Religion is very easy.",ref:"বুখারি: ৩৯"},
+{n:6,cat:"দ্বীন",ar:"مَنْ يُرِدِ اللهُ بِهِ خَيْرًا يُفَقِّهْهُ فِي الدِّيْنِ",bn:"আল্লাহ যার কল্যাণ চান তাকে দ্বীনে গভীর বুঝ দান করেন।",en:"Whoever Allah intends good for, He gives him understanding of the religion.",ref:"বুখারি: ৩১১৬"},
+{n:7,cat:"সহজ দ্বীন",ar:"يَسِّرُوا وَلَا تُعَسِّرُوا وَبَشِّرُوا وَلَا تُنَفِّرُوا",bn:"তোমরা সহজ করো, দ্বীনকে কঠিন করে তুলো না। মানুষকে সুসংবাদ শোনাও, দ্বীনের ব্যাপারে ভীত-সন্ত্রস্ত ও বীতশ্রদ্ধ করে তুলো না।",en:"Make things easy and do not make them difficult; give glad tidings and do not drive people away.",ref:"বুখারি: ৬৯"},
+{n:8,cat:"দ্বীন প্রচার",ar:"بَلِّغُوا عَنِّيْ وَلَوْ آيَةً",bn:"আমার পক্ষ থেকে একটি আয়াত হলেও অন্যের কাছে পৌঁছে দাও।",en:"Convey (my teachings) even if it were a single sentence.",ref:"বুখারি: ৩৪৬১"},
+{n:9,cat:"সফলতা",ar:"قَدْ اَفْلَحَ مَنْ اَسْلَمَ",bn:"যে ইসলাম গ্রহণ করেছে, সে সফল হয়েছে।",en:"Successful is the one who has embraced Islam.",ref:"মুসলিম: ১০৫৪"},
+{n:10,cat:"শ্রেষ্ঠ ব্যক্তি",ar:"اَفْضَلُ الذِّكْرِ لَا اِلٰهَ اِلَّا اللهُ",bn:"সর্বোত্তম যিকির 'লা ইলাহা ইল্লাল্লাহ'।",en:"The best way to celebrate the remembrance of Allah is to say: 'there is no true god except Allah'.",ref:"তিরমিযী: ৩৩৮৩"},
+{n:11,cat:"ঈমান",ar:"قُلْ اٰمَنْتُ بِاللهِ ثُمَّ اسْتَقِمْ",bn:"বলো, আমি ঈমান এনেছি, তারপর অবিচল থাকো।",en:"Say I believe in Allah and then be steadfast.",ref:"মুসলিম: ৩৮"},
+{n:12,cat:"তাকওয়া",ar:"اِتَّقِ اللهَ حَيْثُمَا كُنْتَ",bn:"যেখানেই থাকো, আল্লাহকে ভয় করো, কর্তব্যপরায়ণ থাকো।",en:"Be dutiful to Allah wherever you are.",ref:"তিরমিযী: ৬১"},
+{n:13,cat:"সালাত",ar:"مَنْ صَلَّى الصُّبْحَ فَهُوَ فِيْ ذِمَّةِ اللهِ",bn:"যে ব্যক্তি ফজরের সালাত আদায় করে, সে আল্লাহর নিরাপত্তায় (যিম্মায়) থাকে।",en:"Whoever prays the Fajr prayer is under the protection (guarantee) of Allah.",ref:"মুসলিম: ৬৫৭"},
+{n:14,cat:"সুরক্ষা",ar:"اِحْفَظِ اللهَ يَحْفَظْكَ",bn:"আল্লাহর আদেশ ও নিষেধ বাস্তবায়নের মাধ্যমে তাঁকে হেফাজত করো, তাহলে আল্লাহ তোমাকে দুনিয়াতে বিপদাপদ ও অকল্যাণ থেকে রক্ষা করবেন এবং পরকালে সকল প্রকার শাস্তি থেকে বাঁচিয়ে দেবেন।",en:"Be mindful of Allah and Allah will protect you.",ref:"তিরমিযী: ২৫১৬"},
+{n:15,cat:"দোয়া",ar:"اِذَا سَاَلْتَ فَاسْاَلِ اللهَ",bn:"যখন কিছু চাইবে, আল্লাহর কাছেই চাইবে।",en:"If you ask, ask only Allah.",ref:"তিরমিযী: ২৫১৬"},
+{n:16,cat:"দোয়া",ar:"الدُّعَاءُ هُوَ الْعِبَادَةُ",bn:"দোয়া অন্যতম ইবাদত।",en:"The supplication is a form of worship.",ref:"তিরমিযী: ২৯৬৯"},
+{n:17,cat:"দোয়া",ar:"اَلدُّعَاءُ يَنْفَعُ مِمَّا نَزَلَ وَمِمَّا لَمْ يَنْزِلْ",bn:"দোয়া বিপদে এবং বিপদ আসার আগেও উপকারে আসে।",en:"Supplication benefits against what has already descended and what has not yet descended.",ref:"তিরমিযী: ৩৫৪৮"},
+{n:18,cat:"আল্লাহর সাক্ষাৎ",ar:"مَنْ اَحَبَّ لِقَاءَ اللهِ اَحَبَّ اللهُ لِقَاءَهُ",bn:"যে ব্যক্তি আল্লাহর সাথে সাক্ষাৎ করা পছন্দ করবে, আল্লাহও তার সাথে সাক্ষাৎ করা পছন্দ করবেন।",en:"He who loves to meet Allah, Allah also loves to meet him.",ref:"মুসলিম: ২৬৮৪"},
+{n:19,cat:"যিকির",ar:"يَا اَيُّهَا النَّاسُ اذْكُرُوا اللهَ",bn:"হে লোকেরা, আল্লাহর যিকির করো।",en:"O people always remember Allah.",ref:"তিরমিযী: ৫৮০"},
+{n:20,cat:"সৌন্দর্য",ar:"اِنَّ اللهَ جَمِيْلٌ يُحِبُّ الْجَمَالَ",bn:"নিশ্চয়ই আল্লাহ সুন্দর, সৌন্দর্য পছন্দ করেন।",en:"Allah is Beautiful, He loves beauty.",ref:"মুসলিম: ৬১২"},
+{n:21,cat:"পবিত্রতা",ar:"لَا يَقْبَلُ اللهُ صَلَاةً بِغَيْرِ طُهُوْرٍ",bn:"আল্লাহ পবিত্রতাহীন সালাত গ্রহণ করেন না।",en:"Allah does not accept Salah without purification.",ref:"নাসায়ি: ১৩৯"},
+{n:22,cat:"পবিত্রতা",ar:"اَلطُّهُوْرُ شَطْرُ الْاِيْمَانِ",bn:"পবিত্রতা ঈমানের অঙ্গ।",en:"Cleanliness is half of faith.",ref:"মুসলিম: ২২৩"},
+{n:23,cat:"অযু",ar:"اَسْبِغُوا الْوُضُوْءَ",bn:"ভালোভাবে অযু করো।",en:"Perform ablution properly.",ref:"মুসলিম: ২৪১"},
+{n:24,cat:"মিসওয়াক",ar:"اَلسِّوَاكُ مَطْهَرَةٌ لِلْفَمِ مَرْضَاةٌ لِلرَّبِّ",bn:"মিসওয়াক মুখের পবিত্রতা অর্জনের মাধ্যম এবং রবের সন্তুষ্টির কারণ।",en:"Siwak is a means of purification for the mouth and is pleasing to the Lord.",ref:"নাসায়ি: ৫"},
+{n:25,cat:"সালাত",ar:"صَلُّوا خَمْسَكُمْ",bn:"তোমরা পাঁচ ওয়াক্ত সালাত আদায় করো।",en:"Perform your five daily prayers.",ref:"তিরমিযী: ৭৩"},
+{n:26,cat:"সালাত",ar:"مَنْ تَرَكَ الصَّلَاةَ مُتَعَمِّدًا فَقَدْ كَفَرَ",bn:"যে ব্যক্তি ইচ্ছাকৃতভাবে নামায ছেড়ে দিলো, সে কুফরি করল।",en:"Whoever deliberately leaves the prayer has committed disbelief.",ref:"মুসলিম: ৮২"},
+{n:27,cat:"সেজদা",ar:"عَلَيْكَ بِكَثْرَةِ السُّجُوْدِ",bn:"বেশি বেশি সেজদা করো, সালাত আদায় করো।",en:"Make frequent prostrations before Allah.",ref:"মুসলিম: ১০৭"},
+{n:28,cat:"সেজদা",ar:"اَقْرَبُ مَا يَكُوْنُ الْعَبْدُ مِنْ رَبِّهِ وَهُوَ سَاجِدٌ فَاَكْثِرُوا الدُّعَاءَ",bn:"বান্দা সেজদা অবস্থায় তার রবের সবচেয়ে কাছে থাকে। বেশি বেশি দোয়া করো।",en:"The closest a servant is to his Lord is when he is in prostration (sujood), so increase supplication (du'a).",ref:"মুসলিম: ৪৮২"},
+{n:29,cat:"সালাত",ar:"اَتِمُّوا الرُّكُوْعَ وَالسُّجُوْدَ",bn:"রুকু-সেজদা পরিপূর্ণভাবে আদায় করো।",en:"Perform the bowing and the prostration of prayer properly.",ref:"বুখারি: ৬৬৪৪"},
+{n:30,cat:"সদকা",ar:"مَا نَقَصَتْ صَدَقَةٌ مِنْ مَالٍ",bn:"সদকা করলে সম্পদ কমে না।",en:"Charity does not in any way decrease the wealth.",ref:"মুসলিম: ৬০৩"},
+{n:31,cat:"সদকা",ar:"مَنْ سَاَلَ بِاللهِ فَاَعْطُوْهُ",bn:"আল্লাহর দোহাই দিয়ে কেউ ভিক্ষা চাইলে, তাকে কিছু হলেও দান করবে।",en:"If anyone begs in Allah's name, give him something.",ref:"আবু দাউদ: ১৬৭২"},
+{n:32,cat:"সদকা",ar:"اَلْكَلِمَةُ الطَّيِّبَةُ صَدَقَةٌ",bn:"উত্তম কথা সদকাস্বরূপ।",en:"Saying something good is an act of charity.",ref:"বুখারি: ২৯৮৯"},
+{n:33,cat:"সদকা",ar:"اَلْاَمْرُ بِالْمَعْرُوْفِ صَدَقَةٌ",bn:"সৎকাজে আদেশ করা সদকাস্বরূপ।",en:"Enjoining good is an act of charity.",ref:"মুসলিম: ১১৮"},
+{n:34,cat:"সদকা",ar:"لَا تَعُدْ فِيْ صَدَقَتِكَ",bn:"সদকা করে তা ফেরত নিয়ো না।",en:"Do not take back your charity.",ref:"মুসলিম: ১৬২০"},
+{n:35,cat:"সদকা",ar:"كُلُّ مَعْرُوْفٍ صَدَقَةٌ",bn:"প্রতিটি ভালো কাজই সদকা।",en:"Every act of kindness is charity.",ref:"বুখারি: ৬০২১"},
+{n:36,cat:"সদকা",ar:"تَبَسُّمُكَ فِيْ وَجْهِ اَخِيْكَ لَكَ صَدَقَةٌ",bn:"তোমার ভাইয়ের সামনে তোমার মুচকি হাসিও একটি সদকা।",en:"Your smiling in the face of your brother is charity for you.",ref:"তিরমিযী: ১৯৫৬"},
+{n:37,cat:"সদকা",ar:"وَالتَّكْبِيْرُ صَدَقَةٌ",bn:"'আল্লাহু আকবার' বলা সদকা।",en:"Saying 'Allahu Akbar' is charity.",ref:"মুসলিম: ১০০৬"},
+{n:38,cat:"দান",ar:"اَلْيَدُ الْعُلْيَا خَيْرٌ مِنَ الْيَدِ السُّفْلٰى",bn:"উপরের হাত (দানকারী) নিচের হাত (গ্রহীতা) থেকে উত্তম।",en:"The upper (giving) hand is better than the lower (taking) hand.",ref:"বুখারি: ১৪২৭"},
+{n:39,cat:"কুরআন",ar:"اِنَّ اَحْسَنَ الْحَدِيْثِ كِتَابُ اللهِ",bn:"সর্বোত্তম কথা হলো আল্লাহর কিতাব।",en:"The best speech is Allah's Book.",ref:"বুখারি: ৭২৭৭"},
+{n:40,cat:"কুরআন",ar:"خُذُوا بِكِتَابِ اللهِ وَاسْتَمْسِكُوا بِهِ",bn:"আল্লাহর কিতাব শক্ত করে আঁকড়ে ধরো এবং আল্লাহর কিতাবের সাথে লেগে থাকো।",en:"Hold fast to the Book of Allah and adhere to it.",ref:"মুসলিম: ২৪০৮"},
+{n:41,cat:"কুরআন",ar:"خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ",bn:"তোমাদের মধ্যে সর্বোত্তম সেই ব্যক্তি যে কুরআন শেখে ও শেখায়।",en:"The best among you is he who learns and teaches the Qur'an.",ref:"বুখারি: ৯৯৩"},
+{n:42,cat:"কুরআন",ar:"زَيِّنُوا الْقُرْآنَ",bn:"সুন্দর কণ্ঠস্বরে কুরআন তেলাওয়াত করবে।",en:"Make your voices beautiful when you recite Quran.",ref:"ইবনে মাজাহ: ১৩৪২"},
+{n:43,cat:"কুরআন",ar:"تَعَاهَدُوا الْقُرْآنَ",bn:"নিয়মিত কুরআন পড়বে, কুরআন চর্চা করবে।",en:"Read the Qur'an regularly.",ref:"বুখারি: ৫০৩৩"},
+{n:44,cat:"কুরআন",ar:"اِقْرَؤُوا الْقُرْآنَ فَاِنَّهُ يَاْتِيْ يَوْمَ الْقِيَامَةِ شَفِيْعًا لِاَصْحَابِهِ",bn:"তোমরা কুরআন পাঠ করো। কেননা, তা কেয়ামতের দিন তার পাঠকারীদের জন্য সুপারিশকারীরূপে উপস্থিত হবে।",en:"Recite the Qur'an, for it will come on the Day of Resurrection as an intercessor for its companions.",ref:"মুসলিম: ৮০৪"},
+{n:45,cat:"ইলম",ar:"طَلَبُ الْعِلْمِ فَرِيْضَةٌ عَلٰى كُلِّ مُسْلِمٍ",bn:"ইলম তলব করা প্রতিটি মুসলমানের ওপর ফরজ।",en:"Seeking knowledge is an obligation upon every Muslim.",ref:"ইবনে মাজাহ: ২২৪"},
+{n:46,cat:"ইলম",ar:"مَنْ سَلَكَ طَرِيْقًا يَلْتَمِسُ فِيْهِ عِلْمًا سَهَّلَ اللهُ لَهُ طَرِيْقًا اِلَى الْجَنَّةِ",bn:"যে ইলম অর্জনের পথে চলে আল্লাহ তার জন্য জান্নাতের পথ সহজ করে দেন।",en:"Whoever travels a path seeking knowledge, Allah will make easy for him a path to Paradise.",ref:"মুসলিম: ২৬৯৯"},
+{n:47,cat:"ইলম",ar:"فَضْلُ الْعِلْمِ اَحَبُّ اِلَيَّ مِنْ فَضْلِ الْعِبَادَةِ",bn:"নফল ইবাদতের চেয়ে জ্ঞান অর্জনের ব্যাপারটা আমার কাছে বেশি প্রিয়।",en:"The excellence of knowledge is more beloved to me than the excellence of worship.",ref:"তাবারানি: ৩৯৬০"},
+{n:48,cat:"আলেম",ar:"اِنَّ الْعُلَمَاءَ وَرَثَةُ الْاَنْبِيَاءِ",bn:"উলামায়ে কেরাম নবীগণের উত্তরসূরি।",en:"Indeed, the scholars are the inheritors of the prophets.",ref:"আবু দাউদ: ৩৬৪১"},
+{n:49,cat:"মধ্যমপন্থা",ar:"اَلْقَصْدَ الْقَصْدَ تَبْلُغُوا",bn:"মধ্যমপন্থা অবলম্বন করো, তাহলে আপন লক্ষ্যে পৌঁছতে পারবে।",en:"Always adopt a middle, moderate way to reach your target.",ref:"বুখারি: ৬৪৬৩"},
+{n:50,cat:"ঝগড়া পরিহার",ar:"اَلَا هَلَكَ الْمُتَنَطِّعُوْنَ",bn:"অধিক বাড়াবাড়ি ও ঝগড়াকারী লোকেরা ধ্বংসপ্রাপ্ত হয়েছে।",en:"Beware! The extremists perished.",ref:"আবু দাউদ: ৪৬০৮"},
+{n:51,cat:"মুমিনের সঙ্গ",ar:"لَا تُصَاحِبْ اِلَّا مُؤْمِنًا",bn:"শুধু মুমিন ব্যক্তির সঙ্গ অবলম্বন করো।",en:"Keep only a believer as a companion.",ref:"তিরমিযী: ২৩৯৫"},
+{n:52,cat:"ঐক্য",ar:"مَنْ حَمَلَ عَلَيْنَا السِّلَاحَ فَلَيْسَ مِنَّا",bn:"যে ব্যক্তি আমাদের বিরুদ্ধে অস্ত্র তুলে নিবে, সে আমাদের দলভুক্ত নয়।",en:"Whoever takes up arms against us, is not from us.",ref:"বুখারি: ৭০৭০"},
+{n:53,cat:"মাতা-পিতা",ar:"اِنَّ اللهَ حَرَّمَ عَلَيْكُمْ عُقُوْقَ الْاُمَّهَاتِ",bn:"আল্লাহ তোমাদের ওপর মায়েদের সাথে দুর্ব্যবহার করা হারাম করেছেন।",en:"Allah has forbidden you to be undutiful to your mothers.",ref:"বুখারি: ৫৯৭৫"},
+{n:54,cat:"মাতা-পিতা",ar:"اَلْوَالِدُ اَوْسَطُ اَبْوَابِ الْجَنَّةِ",bn:"বাবা হলেন জান্নাতের মধ্যবর্তী দরজাস্বরূপ।",en:"The father is the middle door of Paradise.",ref:"ইবনে মাজাহ: ৩৬৬৩"},
+{n:55,cat:"মাতা-পিতা",ar:"لَا تَرْغَبُوا عَنْ آبَائِكُمْ",bn:"তোমরা বাবাদের ব্যাপারে উদাসীন হয়ে যেয়ো না।",en:"Do not turn away from your fathers.",ref:"বুখারি: ২৯৩"},
+{n:56,cat:"মুসলিম ভাই",ar:"اَلْمُسْلِمُ اَخُو الْمُسْلِمِ",bn:"এক মুসলিম আরেক মুসলিমের ভাই।",en:"A Muslim is a brother of another Muslim.",ref:"বুখারি: ২৪৪২"},
+{n:57,cat:"মুসলিম ভাই",ar:"كُوْنُوا عِبَادَ اللهِ اِخْوَانًا",bn:"তোমরা আল্লাহর বান্দা ভাই ভাই হয়ে থাকো।",en:"Be like brothers, O Servants of Allah.",ref:"মুসলিম: ২৫৫৮"},
+{n:58,cat:"মুসলিম ভাই",ar:"لَا تَبَاغَضُوا وَلَا تَحَاسَدُوا وَلَا تَدَابَرُوا",bn:"তোমরা পরস্পর হিংসা-বিদ্বেষ করো না এবং একে অপরের দিকে পিঠ ফিরিয়ে থেকো না।",en:"Do not be angry with each other and do not envy each other and do not turn away from each other.",ref:"মুওয়াত্তা: ১৬৮২"},
+{n:59,cat:"মুসলিম ভাই",ar:"لَا يَحِلُّ لِمُسْلِمٍ اَنْ يَهْجُرَ اَخَاهُ فَوْقَ ثَلَاثِ لَيَالٍ",bn:"কোনো মুসলিমের জন্য তার কোনো মুসলিম ভাইকে তিন রাত্রির অধিক ত্যাগ করা বৈধ নয়।",en:"It is not halal for a muslim to shun his brother for more than three nights.",ref:"বুখারি: ৬০৭৬"},
+{n:60,cat:"সম্মান রক্ষা",ar:"مَنْ سَتَرَ مُسْلِمًا سَتَرَهُ اللهُ فِي الدُّنْيَا وَالْآخِرَةِ",bn:"যে ব্যক্তি কোনো মুসলিমের দোষ গোপন রাখে, আল্লাহ দুনিয়া ও আখেরাতে তার দোষ গোপন রাখবেন।",en:"Whoever conceals the faults of a Muslim, Allah will conceal his faults in this world and the Hereafter.",ref:"ইবনে মাজাহ: ২৫৪৬"},
+{n:61,cat:"মুমিন",ar:"اَلْمُؤْمِنُ مِرْآةُ الْمُؤْمِنِ",bn:"এক মুমিন আরেক মুমিনের আয়নাস্বরূপ।",en:"A believer is a mirror to his brother.",ref:"আবু দাউদ: ৪৯১৮"},
+{n:62,cat:"মুমিন",ar:"اَلْمُؤْمِنُ لَا يَنْجُسُ",bn:"মুমিন অপবিত্র হয় না।",en:"A believer does not become impure.",ref:"বুখারি: ২৮৩"},
+{n:63,cat:"সাহায্য",ar:"اُنْصُرْ اَخَاكَ ظَالِمًا اَوْ مَظْلُوْمًا",bn:"তোমার ভাইকে সাহায্য করো, সে জালেম হোক বা মজলুম।",en:"Help your brother, whether he is an oppressor or he is oppressed.",ref:"বুখারি: ৬৯৫২",note:"ব্যাখ্যা: এ কথা শুনে সাহাবায়ে কেরাম প্রশ্ন করলেন, ইয়া রাসূলাল্লাহ, মজলুমকে সাহায্য করা বুঝলাম, জালেমকে কীভাবে সাহায্য করব? নবীজি বললেন, জালেমকে জুলুম থেকে বাধা দিয়ে সাহায্য করবে।"},
+{n:64,cat:"মুমিন",ar:"مَنْ سَرَّتْهُ حَسَنَتُهُ وَسَاءَتْهُ سَيِّئَتُهُ فَذٰلِكُمُ الْمُؤْمِنُ",bn:"যার ভালো কাজ তাকে আনন্দ দেয় এবং যার মন্দ কাজ তাকে কষ্ট দেয়, সেই-ই প্রকৃত মুমিন।",en:"The one whose good deeds make him happy and whose bad deeds make him feel bad—that is the true believer.",ref:"তিরমিযী: ২১৬৫"},
+{n:65,cat:"প্রতিবেশী",ar:"مَنْ كَانَ يُؤْمِنُ بِاللهِ وَالْيَوْمِ الْآخِرِ فَلَا يُؤْذِ جَارَهُ",bn:"যে ব্যক্তি আল্লাহ ও আখেরাতের দিবসে ঈমান রাখে, সে যেন তার প্রতিবেশীকে কষ্ট না দেয়।",en:"Whoever believes in Allah and the Last Day should not harm his neighbor.",ref:"বুখারি: ৬০১৮"},
+{n:66,cat:"মেহমান",ar:"مَنْ كَانَ يُؤْمِنُ بِاللهِ وَالْيَوْمِ الْآخِرِ فَلْيُكْرِمْ ضَيْفَهُ",bn:"যে ব্যক্তি আল্লাহ ও আখিরাতের দিবসে ঈমান রাখে, সে যেন তার মেহমানকে সম্মান করে।",en:"Whoever believes in Allah and the Last Day should honor his guest.",ref:"বুখারি: ৬০১৮"},
+{n:67,cat:"আখলাক",ar:"خَالِقِ النَّاسَ بِخُلُقٍ حَسَنٍ",bn:"মানুষের সাথে উত্তম আচরণ করবে।",en:"Behave well towards the people.",ref:"তিরমিযী: ৬১"},
+{n:68,cat:"আখলাক",ar:"اِنَّ مِنْ خِيَارِكُمْ اَحْسَنَكُمْ اَخْلَاقًا",bn:"তোমাদের মধ্যে যাদের আখলাক সুন্দর, সেই তোমাদের মধ্যে উত্তম।",en:"The best amongst you are those who have the best manners.",ref:"বুখারি: ৩৫৫৯"},
+{n:69,cat:"আখলাক",ar:"اَلْبِرُّ حُسْنُ الْخُلُقِ",bn:"উত্তম চরিত্রই পুণ্য।",en:"Virtue is noble behavior.",ref:"মুসলিম: ২৫৫৩"},
+{n:70,cat:"পাপ",ar:"اَلْاِثْمُ مَا حَاكَ فِيْ صَدْرِكَ وَكَرِهْتَ اَنْ يَطَّلِعَ عَلَيْهِ النَّاسُ",bn:"পাপ হলো সেই বিষয়, যা তোমার অন্তরে খচখচ করে এবং তুমি অপছন্দ করো যে মানুষ তা জেনে ফেলুক।",en:"Sin is that which wavers in your heart and you dislike that people become aware of it.",ref:"মুসলিম: ২৫৫৩"},
+{n:71,cat:"নবীজির আখলাক",ar:"اِنَّمَا بُعِثْتُ لِاُتَمِّمَ مَكَارِمَ الْاَخْلَاقِ",bn:"আমি উত্তম আখলাকে পূর্ণতা দেওয়ার জন্য প্রেরিত হয়েছি।",en:"I was only sent to perfect good character (noble morals).",ref:"বায়হাকি: ২১৩০১"},
+{n:72,cat:"দয়া",ar:"لَا يَرْحَمُ اللهُ مَنْ لَا يَرْحَمُ النَّاسَ",bn:"যে ব্যক্তি মানুষের প্রতি দয়া করে না, আল্লাহ তাকে দয়া করেন না।",en:"Allah will not be merciful to those who are not merciful to mankind.",ref:"বুখারি: ৭৩৭৬"},
+{n:73,cat:"সালাম",ar:"اَفْشُوا السَّلَامَ بَيْنَكُمْ",bn:"তোমাদের মধ্যে সালামের প্রসার ঘটাও।",en:"Promote greeting of Salam amongst you.",ref:"মুসলিম: ৫৪"},
+{n:74,cat:"সালাম",ar:"يُسَلِّمُ الصَّغِيْرُ عَلَى الْكَبِيْرِ",bn:"ছোট বড়কে সালাম দিবে।",en:"The younger person should greet the older one.",ref:"বুখারি: ৬২৩৪"},
+{n:75,cat:"সারল্য",ar:"اَلْبَذَاذَةُ مِنَ الْاِيْمَانِ",bn:"সহজ-সারল্য ঈমানের অংশ।",en:"Simplicity is part of faith.",ref:"ইবনে মাজাহ: ৪১১৮"},
+{n:76,cat:"সচ্চরিত্রতা",ar:"مَنْ يَسْتَعْفِفْ يُعِفَّهُ اللهُ",bn:"যে ব্যক্তি নিষ্কলুষ থাকতে চায়, আল্লাহ তাকে নিষ্কলুষ রাখবেন।",en:"Whoever seeks to remain chaste (or abstinent), Allah will grant him chastity.",ref:"বুখারি: ৫২৭"},
+{n:77,cat:"অমুখাপেক্ষিতা",ar:"وَمَنْ يَسْتَغْنِ يُغْنِهِ اللهُ",bn:"যে ব্যক্তি মানুষের থেকে মুখাপেক্ষীহীন থাকতে চায়, আল্লাহ তাকে মুখাপেক্ষীহীন রাখবেন।",en:"And whoever seeks self-sufficiency, Allah will make him self-sufficient.",ref:"বুখারি: ৫২৭"},
+{n:78,cat:"সবর",ar:"مَنْ يَتَصَبَّرْ يُصَبِّرْهُ اللهُ",bn:"যে ব্যক্তি ধৈর্যধারণ করে, আল্লাহ তাকে সবর দান করেন।",en:"Whoever remains patient, Allah will make him patient.",ref:"মুসলিম: ৬৪৭০"},
+{n:79,cat:"সবর",ar:"وَالصَّبْرُ ضِيَاءٌ",bn:"সবর আলোস্বরূপ।",en:"Patience is light.",ref:"মুসলিম: ২২৩"},
+{n:80,cat:"সবর",ar:"اَنَّ النَّصْرَ مَعَ الصَّبْرِ",bn:"সবরের মাধ্যমেই বিজয় আসে।",en:"The victory comes with patience.",ref:"তিরমিযী: ১৯"},
+{n:81,cat:"সবর",ar:"مَا اُعْطِيَ اَحَدٌ عَطَاءً خَيْرًا وَاَوْسَعَ مِنَ الصَّبْرِ",bn:"সবরের চেয়ে উত্তম ও ব্যাপক কোনো নেয়ামত কাউকে দেওয়া হয়নি।",en:"Nobody can be given a blessing better and greater than patience.",ref:"মুসলিম: ৬৪৭০"},
+{n:82,cat:"কোমলতা",ar:"اِنَّ اللهَ رَفِيْقٌ يُحِبُّ الرِّفْقَ",bn:"নিশ্চয়ই আল্লাহ দয়ালু এবং তিনি কোমলতা পছন্দ করেন।",en:"Indeed, Allah is Gentle and loves gentleness.",ref:"মুসলিম: ২১৬৫"},
+{n:83,cat:"দয়া",ar:"فِيْ كُلِّ كَبِدٍ رَطْبَةٍ اَجْرٌ",bn:"প্রত্যেকটা প্রাণীর সাথে ভালো ব্যবহার করার মধ্যেও সাওয়াব আছে।",en:"There is a reward for service to every living animal.",ref:"মুসলিম: ২২৪৪"},
+{n:84,cat:"দয়া",ar:"اِتَّقُوا اللهَ فِيْ هٰذِهِ الْبَهَائِمِ الْمُعْجَمَةِ",bn:"তোমরা এই অবলা জন্তুদের ব্যাপারে আল্লাহকে ভয় করো।",en:"Fear Allah regarding these dumb animals.",ref:"আবু দাউদ: ২৫৪৮"},
+{n:85,cat:"দয়া",ar:"مَنْ لَا يَرْحَمْ لَا يُرْحَمْ",bn:"যে দয়া করে না, তার ওপর দয়া করা হয় না।",en:"Whoever does not show mercy will not be shown mercy.",ref:"বুখারি: ৬০১৩"},
+{n:86,cat:"নম্রতা",ar:"اِنَّ الرِّفْقَ لَا يَكُوْنُ فِيْ شَيْءٍ اِلَّا زَانَهُ وَلَا يُنْزَعُ مِنْ شَيْءٍ اِلَّا شَانَهُ",bn:"নম্রতা যে বিষয়ে থাকে সে বিষয়কে তা সৌন্দর্যমণ্ডিত করে তোলে। আর যে বিষয় থেকে তা তুলে নেওয়া হয়, সে বিষয়কে সৌন্দর্যহীন করে ছাড়ে।",en:"Gentleness is not found in anything except that it beautifies it, and it is not removed from anything except that it makes it defective.",ref:"মুসলিম: ২৫৯৪"},
+{n:87,cat:"কোমলতা",ar:"مَنْ يُحْرَمِ الرِّفْقَ يُحْرَمِ الْخَيْرَ",bn:"যে ব্যক্তি কোমলতা থেকে বঞ্চিত, সে ব্যক্তি কল্যাণ থেকে বঞ্চিত।",en:"Whoever is deprived of gentleness is deprived of all good.",ref:"মুসলিম: ২৫৯২"},
+{n:88,cat:"লজ্জাশীলতা",ar:"اَلْحَيَاءُ كُلُّهُ خَيْرٌ",bn:"লজ্জাশীলতা পুরোটাই কল্যাণ।",en:"All of shyness is good.",ref:"মুসলিম: ৩৭"},
+{n:89,cat:"সেবা",ar:"سَاقِي الْقَوْمِ آخِرُهُمْ شُرْبًا",bn:"পানীয় পরিবেশনকারী সবার পরে পান করবে।",en:"The one who serves water to others should be the last one to drink from it.",ref:"ইবনে মাজাহ: ৩৪৩৪"},
+{n:90,cat:"পোশাক",ar:"اِلْبَسُوا مِنْ ثِيَابِكُمُ الْبَيَاضَ",bn:"সাদা পোশাক পরার চেষ্টা করবে।",en:"Wear often white clothes.",ref:"আবু দাউদ: ৩৮৭৮"},
+{n:91,cat:"জান্নাত",ar:"فِي الْجَنَّةِ ثَمَانِيَةُ اَبْوَابٍ",bn:"জান্নাতে আটটি দরজা আছে।",en:"Paradise has eight gates.",ref:"বুখারি: ৩২৫৭"},
+{n:92,cat:"সত্যবাদিতা",ar:"اَلصِّدْقُ طُمَأْنِيْنَةٌ",bn:"সত্যবাদিতায় প্রশান্তি আছে।",en:"The truth brings peace.",ref:"তিরমিযী: ২৫১৮"},
+{n:93,cat:"সত্যবাদিতা",ar:"عَلَيْكُمْ بِالصِّدْقِ",bn:"সত্যবাদিতাকে আঁকড়ে ধরো।",en:"Always tell the truth.",ref:"আবু দাউদ: ৪৯৮৯"},
+{n:94,cat:"আনুগত্য",ar:"اَطِيْعُوا اُمَرَاءَكُمْ",bn:"নেতাদের আনুগত্য করবে।",en:"Obey your leaders.",ref:"তিরমিযী: ৭৩"},
+{n:95,cat:"সুস্থতা",ar:"سَلُوا اللهَ الْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ",bn:"আল্লাহর কাছে দুনিয়া ও আখেরাতে নিরাপত্তা প্রার্থনা করবে।",en:"Ask Allah to give you safety in this world and in the hereafter.",ref:"তিরমিযী: ৩৫৯৪"},
+{n:96,cat:"সতর",ar:"اَلْفَخِذُ عَوْرَةٌ",bn:"রান সতরের অন্তর্ভুক্ত।",en:"Know that the thigh is private part.",ref:"তিরমিযী: ২৭৯৭"},
+{n:97,cat:"হাদিয়া",ar:"تَهَادَوْا تَحَابُّوا",bn:"পরস্পর হাদিয়া বিনিময় করবে, মহব্বত বৃদ্ধি পাবে।",en:"Exchange gifts, you will love one another.",ref:"মুওয়াত্তা মালিক: ১৬৫১"},
+{n:98,cat:"খাবার আদব",ar:"سَمِّ اللهَ وَكُلْ بِيَمِيْنِكَ",bn:"আল্লাহর নাম নিয়ে ডান হাতে আহার করবে।",en:"Mention the name of Allah, and eat with your right hand.",ref:"মুসলিম: ২০২২"},
+{n:99,cat:"খাবার আদব",ar:"لَا تَاْكُلُوا بِالشِّمَالِ فَاِنَّ الشَّيْطَانَ يَاْكُلُ بِالشِّمَالِ",bn:"বাম হাত দিয়ে আহার করো না, শয়তান বাম হাত দিয়ে খায়।",en:"Do not eat with your left hand, for Shaitan eats with his left hand.",ref:"মুসলিম: ২০১৯"},
+{n:100,cat:"ছবি নিষিদ্ধ",ar:"لَا تَدْخُلُ الْمَلَائِكَةُ بَيْتًا فِيْهِ كَلْبٌ وَلَا صُوْرَةٌ",bn:"যে ঘরে কুকুর ও প্রাণীর ছবি থাকে, সে ঘরে ফেরেশতা প্রবেশ করে না।",en:"The angels do not enter a house in which there is a dog or a picture.",ref:"বুখারি: ৩২২৫"},
+{n:101,cat:"চুলের যত্ন",ar:"مَنْ كَانَ لَهُ شَعْرٌ فَلْيُكْرِمْهُ",bn:"যে ব্যক্তির চুল আছে, সে যেন তার যত্ন করে।",en:"He who has hair should honour it.",ref:"আবু দাউদ: ৪১৬৩"},
+{n:102,cat:"ক্ষতি নিষেধ",ar:"مَنْ ضَارَّ ضَارَّ اللهُ بِهِ",bn:"যে ব্যক্তি অন্যের ক্ষতি করে, আল্লাহ তার ক্ষতি করেন।",en:"Whoever harms others, Allah will harm him.",ref:"আবু দাউদ: ৩৬৩৫"},
+{n:103,cat:"ক্ষতি নিষেধ",ar:"لَا ضَرَرَ وَلَا ضِرَارَ",bn:"নিজের ক্ষতি করা যাবে না, অন্যের ক্ষতিও করা যাবে না।",en:"There should be neither harming nor reciprocating harm.",ref:"ইবনে মাজাহ: ২৩৪০"},
+{n:104,cat:"দাওয়াত",ar:"مَنْ دَعَاكُمْ فَاَجِيْبُوْهُ",bn:"যে তোমাদের দাওয়াত দেয়, তার দাওয়াত গ্রহণ করবে।",en:"Accept the invitation of him who invites you.",ref:"আবু দাউদ: ২১৩"},
+{n:105,cat:"অহংকার",ar:"اَلْكِبْرُ بَطَرُ الْحَقِّ وَغَمْطُ النَّاسِ",bn:"অহংকার হলো সত্যকে অস্বীকার করা এবং মানুষকে তুচ্ছ জ্ঞান করা।",en:"Arrogance is rejecting the truth and looking down on people.",ref:"মুসলিম: ৯১"},
+{n:106,cat:"অহংকার",ar:"مَنْ كَانَ فِيْ قَلْبِهِ مِثْقَالُ ذَرَّةٍ مِنْ كِبْرٍ لَا يَدْخُلُ الْجَنَّةَ",bn:"যার অন্তরে অণু পরিমাণ অহংকার থাকবে সে জান্নাতে প্রবেশ করবে না।",en:"He will not enter Paradise who has in his heart an atom's weight of arrogance.",ref:"মুসলিম: ৯১"},
+{n:107,cat:"চুপ থাকা",ar:"مَنْ صَمَتَ نَجَا",bn:"যে চুপ থাকে সে মুক্তি পেল।",en:"Whoever remains silent is saved.",ref:"তিরমিযী: ২৫০১"},
+{n:108,cat:"চুপ থাকা",ar:"مَنْ كَانَ يُؤْمِنُ بِاللهِ وَالْيَوْمِ الْآخِرِ فَلْيَقُلْ خَيْرًا اَوْ لِيَصْمُتْ",bn:"আর যে ব্যক্তি আল্লাহ ও আখিরাতের দিবসে ঈমান রাখে, সে যেন ভালো কথা বলে অথবা নীরব থাকে।",en:"And whoever believes in Allah and the Last Day should speak good or remain silent.",ref:"বুখারি: ৬০১৮"},
+{n:109,cat:"ইসলামের সৌন্দর্য",ar:"مِنْ حُسْنِ اِسْلَامِ الْمَرْءِ تَرْكُهُ مَا لَا يَعْنِيْهِ",bn:"একজন ব্যক্তির ইসলামের সৌন্দর্য হলো অনর্থক বিষয় ত্যাগ করা।",en:"Part of a person's good Islam is leaving that which does not concern him.",ref:"তিরমিযী: ২৩১৭"},
+{n:110,cat:"মুসলিম",ar:"اَلْمُسْلِمُ مَنْ سَلِمَ الْمُسْلِمُوْنَ مِنْ لِسَانِهِ وَيَدِهِ",bn:"প্রকৃত মুসলিম সে, যার হাত ও মুখ থেকে অন্য মুসলিম নিরাপদ।",en:"A Muslim is the one from whose tongue and hand other Muslims are safe.",ref:"বুখারি: ১০"},
+{n:111,cat:"মুসলিম",ar:"اَلْمُسْلِمُوْنَ عِنْدَ شُرُوْطِهِمْ",bn:"মুসলিমরা তাদের দেওয়া শর্ত পালনে প্রতিশ্রুতিবদ্ধ।",en:"Muslims are bound by their conditions (agreements).",ref:"আবু দাউদ: ৩৫৯৪"},
+{n:112,cat:"মুমিন",ar:"اَلْمُؤْمِنُ لِلْمُؤْمِنِ كَالْبُنْيَانِ يَشُدُّ بَعْضُهُ بَعْضًا",bn:"এক মুমিন অন্য মুমিনের জন্য ইমারত বা দেয়ালের মতো, একে অপরকে মজবুত করে।",en:"A believer to another believer is like a building; each part strengthens the other.",ref:"বুখারি: ২৪৪৬"},
+{n:113,cat:"ঈমান",ar:"لَا يُؤْمِنُ اَحَدُكُمْ حَتّٰى يُحِبَّ لِاَخِيْهِ مَا يُحِبُّ لِنَفْسِهِ",bn:"তোমাদের কেউ ততক্ষণ পর্যন্ত মুমিন হতে পারবে না, যতক্ষণ না সে তার ভাইয়ের জন্য তাই পছন্দ করবে যা সে নিজের জন্য পছন্দ করে।",en:"None of you truly believes until he loves for his brother what he loves for himself.",ref:"বুখারি: ১৩"},
+{n:114,cat:"ঈমান",ar:"لَا تَدْخُلُوا الْجَنَّةَ حَتّٰى تُؤْمِنُوا وَلَا تُؤْمِنُوا حَتّٰى تَحَابُّوا",bn:"ঈমান না আনা পর্যন্ত জান্নাতে যাবে না, আর পরস্পরকে না ভালোবাসা পর্যন্ত মুমিন হবে না।",en:"You will not enter Paradise until you believe, and you will not truly believe until you love one another.",ref:"মুসলিম: ৫৪"},
+{n:115,cat:"শক্তিশালী মুমিন",ar:"اَلْمُؤْمِنُ الْقَوِيُّ خَيْرٌ وَاَحَبُّ اِلَى اللهِ مِنَ الْمُؤْمِنِ الضَّعِيْفِ وَفِيْ كُلٍّ خَيْرٌ",bn:"সবল মুমিন আল্লাহর নিকট দুর্বল মুমিন অপেক্ষা প্রিয়তর ও ভালো। অবশ্য উভয়ের মাঝেই কল্যাণ রয়েছে।",en:"The strong believer is better and more beloved to Allah than the weak believer, while there is good in both.",ref:"মুসলিম: ২৬৬৪"},
+{n:116,cat:"পরনিন্দা",ar:"اَتَدْرُوْنَ مَا الْغِيْبَةُ؟ ذِكْرُكَ اَخَاكَ بِمَا يَكْرَهُ",bn:"তোমরা কি জানো গিবত কী? গিবত হলো, তুমি তোমার ভাই সম্পর্কে এমন কিছু বলো, যা সে অপছন্দ করে।",en:"Do you know what backbiting is? It is to mention about your brother that which he dislikes.",ref:"মুসলিম: ২৫৮৯"},
+{n:117,cat:"পরনিন্দা",ar:"لَا يَدْخُلُ الْجَنَّةَ نَمَّامٌ",bn:"পরনিন্দা করে বেড়ানো ব্যক্তি জান্নাতে প্রবেশ করবে না।",en:"A tale-bearer (one who spreads gossip/slander) will not enter Paradise.",ref:"মুসলিম: ১০৫"},
+{n:118,cat:"কুধারণা",ar:"اِيَّاكُمْ وَالظَّنَّ فَاِنَّ الظَّنَّ اَكْذَبُ الْحَدِيْثِ",bn:"তোমরা কুধারণা পোষণ করা থেকে বিরত থাকো। কারণ কুধারণা সবচাইতে বড় মিথ্যা কথা।",en:"Beware of suspicion, for suspicion is the most false of speech.",ref:"বুখারি: ৬৭২৪"},
+{n:119,cat:"শ্রমিকের অধিকার",ar:"اَعْطُوا الْاَجِيْرَ اَجْرَهُ قَبْلَ اَنْ يَجِفَّ عَرَقُهُ",bn:"শ্রমিকের গায়ের ঘাম শুকানোর আগেই তার মজুরি দিয়ে দাও।",en:"Give the worker his wages before his sweat dries.",ref:"ইবনে মাজাহ: ২৪৪৩"},
+{n:120,cat:"হালাল উপার্জন",ar:"اَطْيَبُ الْكَسْبِ عَمَلُ الرَّجُلِ بِيَدِهِ",bn:"সর্বোত্তম উপার্জন হলো নিজ হাতে করা কাজ।",en:"The best earning is that which a man earns with his own hands.",ref:"মুসনাদে আহমাদ: ১৭২৬৫"},
+{n:121,cat:"কৃতজ্ঞতা",ar:"مَنْ لَمْ يَشْكُرِ النَّاسَ لَمْ يَشْكُرِ اللهَ",bn:"যে মানুষের কৃতজ্ঞতা প্রকাশ করে না সে আল্লাহর প্রতিও কৃতজ্ঞ হয় না।",en:"Whoever does not thank people has not thanked Allah.",ref:"তিরমিযী: ১৯৫৫"},
+{n:122,cat:"যেনা-ব্যভিচার",ar:"اِنَّ اللهَ كَتَبَ عَلَى ابْنِ آدَمَ حَظَّهُ مِنَ الزِّنَا، اَدْرَكَ ذٰلِكَ لَا مَحَالَةَ",bn:"আল্লাহ আদম সন্তানের জন্য তার যিনার অংশ লিখে রেখেছেন; সে তা অবশ্যই পাবে। চোখের যিনা হলো তাকানো, জিহ্বার যিনা হলো কথা বলা। আর মন কামনা করে ও আকাঙ্ক্ষা পোষণ করে। এরপর লজ্জাস্থান তা বাস্তবায়ন করে অথবা অস্বীকার করে।",en:"Allah has decreed for the son of Adam his share of zina. The zina of the eyes is looking, the zina of the tongue is speaking, and the soul desires and wishes; then the private parts confirm it or deny it.",ref:"বুখারি: ৬২৪৩"},
+{n:123,cat:"পোশাক",ar:"مَا اَسْفَلَ مِنَ الْكَعْبَيْنِ مِنَ الْاِزَارِ فَفِي النَّارِ",bn:"লুঙ্গি/পোশাকের যে অংশ টাখনুর নিচে থাকে, তা জাহান্নামে থাকবে।",en:"Whatever of the lower garment hangs below the ankles is in the Fire.",ref:"আহমাদ: ৯৯৩৪"},
+{n:124,cat:"লজ্জাস্থানের হেফাজত",ar:"مَنْ يَضْمَنْ لِيْ مَا بَيْنَ لَحْيَيْهِ وَمَا بَيْنَ رِجْلَيْهِ اَضْمَنْ لَهُ الْجَنَّةَ",bn:"যে ব্যক্তি আমাকে তার দুই চোয়ালের মাঝে জিনিস (জিহ্বা) এবং দুই পায়ের মাঝে জিনিস (লজ্জাস্থান) সংরক্ষণের নিশ্চয়তা দেবে, আমি তার জন্য জান্নাতের নিশ্চয়তা দেব।",en:"Whoever guarantees for me what is between his jaws and what is between his legs, I will guarantee Paradise for him.",ref:"বুখারি: ৬৪৭৪"},
+{n:125,cat:"ঝগড়াটে",ar:"اِنَّ اَبْغَضَ الرِّجَالِ اِلَى اللهِ الْاَلَدُّ الْخَصِمُ",bn:"নিশ্চয় আল্লাহর কাছে সবচেয়ে ঘৃণিত মানুষ হলো সেই ব্যক্তি, যে অত্যন্ত ঝগড়াটে ও কঠোর বিতর্ককারী।",en:"Indeed, the most hated of men to Allah is the one who is fiercely quarrelsome and argumentative.",ref:"বুখারি: ২৪৫৭"},
+{n:126,cat:"দৃষ্টি হেফাজত",ar:"لَا تُتْبِعِ النَّظْرَةَ النَّظْرَةَ فَاِنَّهَا لَكَ الْاُوْلٰى وَلَيْسَتْ لَكَ الْآخِرَةُ",bn:"বেগানা নারীর দিকে অনিচ্ছায় একপলক তাকানোর পর আরেকবার তাকিয়ো না। কারণ প্রথম (অনিচ্ছাকৃত) দৃষ্টি তোমার জন্য ক্ষমাযোগ্য, কিন্তু পরবর্তী দৃষ্টি তোমার জন্য বৈধ নয়।",en:"Do not follow one glance with another, for the first is allowed for you, but the second is not.",ref:"আবু দাউদ: ২১৪৯"},
+{n:127,cat:"দায়িত্বশীল",ar:"اَلَا كُلُّكُمْ رَاعٍ وَكُلُّكُمْ مَسْؤُوْلٌ عَنْ رَعِيَّتِهِ",bn:"জেনে রাখো, তোমাদের প্রত্যেকেই দায়িত্বশীল অভিভাবক, এবং প্রত্যেককেই তার অধীনস্থদের সম্পর্কে জিজ্ঞাসা করা হবে।",en:"Beware! Every one of you is a shepherd, and every one of you will be questioned about those under his care.",ref:"আদাবুল মুফরাদ: ১৫১"},
+{n:128,cat:"অন্যায় প্রতিরোধ",ar:"مَنْ رَاَى مِنْكُمْ مُنْكَرًا فَلْيُغَيِّرْهُ بِيَدِهِ، فَاِنْ لَمْ يَسْتَطِعْ فَبِلِسَانِهِ، فَاِنْ لَمْ يَسْتَطِعْ فَبِقَلْبِهِ وَذٰلِكَ اَضْعَفُ الْاِيْمَانِ",bn:"তোমাদের কেউ কোনো অন্যায় কাজ দেখলে সে যেন তা হাত দিয়ে পরিবর্তন করে। যদি তা সম্ভব না হয়, তাহলে জিহ্বা (কথা) দিয়ে। আর যদি তাও সম্ভব না হয়, তাহলে অন্তর দিয়ে (ঘৃণা করবে), আর এটি হলো ঈমানের সবচেয়ে দুর্বল স্তর।",en:"Whoever among you sees an evil, let him change it with his hand; if not able, then with his tongue; and if not able, then with his heart, and that is the weakest level of faith.",ref:"মুসলিম: ৪৯"},
+{n:129,cat:"জান্নাত-জাহান্নাম",ar:"حُفَّتِ الْجَنَّةُ بِالْمَكَارِهِ وَحُفَّتِ النَّارُ بِالشَّهَوَاتِ",bn:"জান্নাতকে কষ্টকর ও অপছন্দনীয় বিষয় দিয়ে ঘিরে রাখা হয়েছে, আর জাহান্নামকে ভোগ-বাসনা ও কামনার বিষয় দিয়ে ঘিরে রাখা হয়েছে।",en:"Paradise is surrounded by hardships, and Hellfire is surrounded by desires.",ref:"ইবনে হিব্বান: ৭১৮"},
+{n:130,cat:"অভিশাপ",ar:"لَعَنَ رَسُوْلُ اللهِ ﷺ الْمُتَشَبِّهِيْنَ مِنَ الرِّجَالِ بِالنِّسَاءِ",bn:"রাসূলুল্লাহ ﷺ সেই পুরুষদের ওপর লানত করেছেন যারা নারীদের অনুকরণ করে, এবং সেই নারীদের ওপরও লানত করেছেন যারা পুরুষদের অনুকরণ করে।",en:"The Messenger of Allah ﷺ cursed men who imitate women and women who imitate men.",ref:"বুখারি: ৫৮৮৫"},
+{n:131,cat:"সুদ",ar:"لَعَنَ رَسُوْلُ اللهِ ﷺ آكِلَ الرِّبَا وَمُوْكِلَهُ وَشَاهِدَيْهِ وَكَاتِبَهُ",bn:"রাসূলুল্লাহ ﷺ সুদখোর, সুদ প্রদানকারী, সুদি লেনদেনের সাক্ষ্যদানকারী ও সুদি লেনদেনের লেখক সবাইকে অভিশাপ দিয়েছেন।",en:"The Messenger of Allah ﷺ cursed the one who consumes interest (riba), the one who pays it, its two witnesses, and its recorder.",ref:"তিরমিযী: ১২০৬"},
+{n:132,cat:"ভিক্ষাবৃত্তি",ar:"مَنْ سَاَلَ النَّاسَ اَمْوَالَهُمْ تَكَثُّرًا",bn:"যে সম্পদ বৃদ্ধির জন্য মানুষের কাছে হাত পাতে সে আসলে জাহান্নামের আগুন যাচ্ঞা করে।",en:"Whoever asks people for their wealth in order to increase his own is only asking for burning embers (fire).",ref:"মুসলিম: ১০৪১"},
+{n:133,cat:"ক্ষমাপরায়ণতা",ar:"تَجَافَوْا عَنْ عُقُوْبَةِ ذَوِي الْمُرُوْءَةِ",bn:"সম্ভ্রান্ত ও ভদ্র মানুষের ভুলত্রুটি ক্ষমা করো।",en:"Avoid (or overlook) the punishment of people of dignity and noble character.",ref:"সহিহ জামি: ২৯১৪"},
+{n:134,cat:"উত্তম আমল",ar:"اَحَبُّ الْاَعْمَالِ اِلَى اللهِ اَدْوَمُهَا وَاِنْ قَلَّ",bn:"আল্লাহর কাছে সবচেয়ে প্রিয় আমল তা-ই যা নিয়মিত করা হয়, যদিও তা অল্প হয়।",en:"The most beloved deeds to Allah are those that are consistent, even if they are few.",ref:"বুখারি: ৬৪৬৫"},
+{n:135,cat:"মুমিনের সম্পদ",ar:"اَلْكَلِمَةُ الْحِكْمَةُ ضَالَّةُ الْمُؤْمِنِ",bn:"প্রজ্ঞাপূর্ণ কথা মুমিনের হারানো সম্পদ।",en:"A wise word is the lost property of the believer.",ref:"তিরমিযী: ২৬৮৭"},
+{n:136,cat:"সৎকর্ম",ar:"اَلدَّالُّ عَلَى الْخَيْرِ كَفَاعِلِهِ",bn:"ভালো কাজে পথপ্রদর্শক সেই কাজ সম্পাদনকারীর সমান সওয়াব পাবে।",en:"The one who guides (others) to good is like the one who does it.",ref:"তিরমিযী: ২৬৭০"},
+{n:137,cat:"দুরুদ",ar:"مَنْ صَلّٰى عَلَيَّ صَلَاةً صَلّٰى اللهُ عَلَيْهِ عَشْرًا",bn:"যে আমার প্রতি একবার দুরুদ পাঠ করে, আল্লাহ তার ওপর ১০ বার রহমত নাযিল করেন।",en:"Whoever sends blessings upon me once, Allah will send blessings upon him ten times.",ref:"মুসলিম: ৪০৮"},
+{n:138,cat:"যিকির",ar:"لَا يَزَالُ لِسَانُكَ رَطْبًا مِنْ ذِكْرِ اللهِ",bn:"তোমার জবান যেন সবসময় আল্লাহর যিকিরে সিক্ত থাকে।",en:"Keep your tongue constantly moist with the remembrance of Allah.",ref:"তিরমিযী: ৩৩৭৫"},
+{n:139,cat:"লজ্জা",ar:"اِنَّ لِكُلِّ دِيْنٍ خُلُقًا وَخُلُقُ الْاِسْلَامِ الْحَيَاءُ",bn:"প্রত্যেক ধর্মের একটি চরিত্র আছে, ইসলামের চরিত্র হলো লজ্জা।",en:"Indeed, every religion has a distinct character, and the character of Islam is modesty (shyness).",ref:"ইবনে মাজাহ: ৩৩৮৯"},
+{n:140,cat:"লজ্জা",ar:"اِذَا لَمْ تَسْتَحِ فَاصْنَعْ مَا شِئْتَ",bn:"যখন তোমার লজ্জা থাকবে না, তখন তুমি যা ইচ্ছা তা-ই করতে পারো।",en:"If you do not feel shame, then do whatever you wish.",ref:"বুখারি: ৩৪৮৪"},
+{n:141,cat:"নিজের উপকার",ar:"اِحْرِصْ عَلٰى مَا يَنْفَعُكَ",bn:"তোমার যাতে উপকার আছে তাতে যত্নবান হও।",en:"Be eager for what benefits you.",ref:"মুসলিম: ২৬৬৪"},
+{n:142,cat:"আল্লাহর সাহায্য",ar:"اِسْتَعِنْ بِاللهِ وَلَا تَعْجِزْ",bn:"আল্লাহর কাছে সাহায্য চাও এবং অক্ষম হয়ে যেয়ো না।",en:"Seek help from Allah and do not give up (do not become helpless).",ref:"মুসলিম: ২৬৬৪"},
+{n:143,cat:"ধোঁকা",ar:"مَنْ غَشَّ فَلَيْسَ مِنَّا",bn:"যে আমাদের ধোঁকা দেয়, সে আমাদের দলভুক্ত নয়।",en:"Whoever deceives us is not one of us.",ref:"মুসলিম: ১০১"},
+{n:144,cat:"প্রকৃত জ্ঞানী",ar:"اَلْكَيِّسُ مَنْ دَانَ نَفْسَهُ وَعَمِلَ لِمَا بَعْدَ الْمَوْتِ",bn:"বুদ্ধিমান সে যে নিজের নফসকে নিয়ন্ত্রণে রাখে এবং মৃত্যুর পরের জন্য কাজ করে।",en:"The intelligent (wise) person is the one who controls his soul and works for what comes after death.",ref:"তিরমিযী: ২৪৫৯"},
+{n:145,cat:"পরোপকার",ar:"مَنْ نَفَّسَ عَنْ مُؤْمِنٍ كُرْبَةً نَفَّسَ اللهُ عَنْهُ كُرْبَةً مِنْ كُرَبِ يَوْمِ الْقِيَامَةِ",bn:"যে কোনো মুমিনের পার্থিব কষ্ট দূর করবে, আল্লাহ কেয়ামতের দিন তার কষ্ট দূর করবেন।",en:"Whoever relieves a believer of a hardship in this world, Allah will relieve him of a hardship on the Day of Resurrection.",ref:"মুসলিম: ২৬৯৯"},
+{n:146,cat:"দৃষ্টিভঙ্গি",ar:"اُنْظُرُوا اِلٰى مَنْ هُوَ اَسْفَلَ مِنْكُمْ",bn:"তোমরা (পার্থিব বিষয়ে) তোমাদের চেয়ে নিচু স্তরের লোকদের দিকে তাকাও (যাতে শোকর করতে পারো)।",en:"Look at those who are below you (in worldly matters).",ref:"মুসলিম: ২৯৬৩"},
+{n:147,cat:"মসজিদ",ar:"اَحَبُّ الْبِلَادِ اِلَى اللهِ مَسَاجِدُهَا",bn:"আল্লাহর কাছে সর্বোত্তম স্থান হলো মসজিদ।",en:"The most beloved places to Allah are its mosques.",ref:"মুসলিম: ৬৭১"},
+{n:148,cat:"মসজিদ",ar:"مَنْ بَنٰى مَسْجِدًا لِلّٰهِ بَنٰى اللهُ لَهُ بَيْتًا فِي الْجَنَّةِ",bn:"যে আল্লাহর জন্য মসজিদ নির্মাণ করবে, আল্লাহ তার জন্য জান্নাতে একটি ঘর নির্মাণ করবেন।",en:"Whoever builds a mosque for Allah, Allah will build for him a house in Paradise.",ref:"বুখারি: ৪৫০"},
+{n:149,cat:"নেশা হারাম",ar:"كُلُّ مُسْكِرٍ حَرَامٌ",bn:"সকল নেশাজাতীয় দ্রব্যই হারাম।",en:"Every intoxicant is forbidden (haram).",ref:"মুসলিম: ২০০৩"},
+{n:150,cat:"নেশা হারাম",ar:"كُلُّ مُسْكِرٍ خَمْرٌ",bn:"সব নেশাজাতীয় বস্তুই খমর (মদের অন্তর্ভুক্ত)।",en:"Every intoxicant is khamr.",ref:"মুসলিম: ২০০৩"},
+{n:151,cat:"রোযা",ar:"اَلصِّيَامُ جُنَّةٌ",bn:"রোযা হলো (জাহান্নাম থেকে বাঁচার) ঢালস্বরূপ।",en:"Fasting is a shield (protection).",ref:"বুখারি: ১৮৯৪"},
+{n:152,cat:"দুনিয়া",ar:"اَلدُّنْيَا سِجْنُ الْمُؤْمِنِ وَجَنَّةُ الْكَافِرِ",bn:"দুনিয়া মুমিনের জন্য জেলখানা এবং কাফেরের জন্য জান্নাত।",en:"This world is a prison for the believer and a paradise for the disbeliever.",ref:"মুসলিম: ২৯৫৬"},
+{n:153,cat:"কেয়ামত",ar:"لَا تَقُوْمُ السَّاعَةُ عَلٰى اَحَدٍ يَقُوْلُ اللهُ اللهُ",bn:"পৃথিবীতে যখন একজনও 'আল্লাহ আল্লাহ' বলার মতো থাকবে না, তখন কেয়ামত হবে।",en:"The Hour (Day of Judgment) will not come upon anyone who says: 'Allah, Allah'.",ref:"মুসলিম: ১৪৮"},
+{n:154,cat:"পবিত্রতা",ar:"اِنَّ اللهَ طَيِّبٌ يُحِبُّ الطَّيِّبَ",bn:"নিশ্চয়ই আল্লাহ পবিত্র, তিনি পবিত্রতাকে ভালোবাসেন।",en:"Indeed Allah is Pure (Good), and He loves that which is pure (good).",ref:"মুসলিম: ১০১৫"},
+{n:155,cat:"বদনজর",ar:"اَلْعَيْنُ حَقٌّ",bn:"নজর লাগা বা কুনজর সত্য।",en:"The evil eye is real.",ref:"বুখারি: ৫৭৪০"},
+{n:156,cat:"নারী অধিকার",ar:"اِسْتَوْصُوا بِالنِّسَاءِ خَيْرًا",bn:"নারীদের সাথে কোমল আচরণ করবে।",en:"Treat women kindly.",ref:"মুসলিম: ১৪৬৮"},
+{n:157,cat:"ঈমানি মৃত্যু",ar:"مَنْ مَاتَ وَهُوَ يَعْلَمُ اَنْ لَا اِلٰهَ اِلَّا اللهُ دَخَلَ الْجَنَّةَ",bn:"যে ব্যক্তি এই জ্ঞান নিয়ে মৃত্যুবরণ করে যে আল্লাহ ছাড়া কোনো ইলাহ নেই, সে জান্নাতে প্রবেশ করবে।",en:"Whoever dies knowing that there is no god but Allah will enter Paradise.",ref:"মুসলিম: ২৬"},
+{n:158,cat:"সৌন্দর্য",ar:"اِنَّ اللهَ جَمِيْلٌ يُحِبُّ الْجَمَالَ",bn:"নিশ্চয়ই আল্লাহ সুন্দর, তিনি সৌন্দর্য পছন্দ করেন।",en:"Indeed, Allah is Beautiful and He loves beauty.",ref:"মুসলিম: ৯১"},
+{n:159,cat:"ভালো কথা",ar:"مَنْ كَانَ يُؤْمِنُ بِاللهِ وَالْيَوْمِ الْآخِرِ فَلْيَقُلْ خَيْرًا اَوْ لِيَصْمُتْ",bn:"যে আল্লাহ ও কেয়ামতে বিশ্বাস করে, সে যেন ভালো কথা বলে অথবা চুপ থাকে।",en:"Whoever believes in Allah and the Last Day should speak good or remain silent.",ref:"বুখারি: ৬১৩৮"},
+{n:160,cat:"মন্দ কাজ",ar:"بِحَسْبِ امْرِئٍ مِنَ الشَّرِّ اَنْ يَحْقِرَ اَخَاهُ الْمُسْلِمَ",bn:"কোনো মুসলিম ভাইকে তুচ্ছ ভাবা একটি মানুষের মন্দ হওয়ার জন্য যথেষ্ট।",en:"It is enough evil for a person to belittle his fellow Muslim.",ref:"মুসলিম: ২৫৬৩"},
+{n:161,cat:"ইখলাস",ar:"اِنَّ اللهَ لَا يَنْظُرُ اِلٰى صُوَرِكُمْ وَاَمْوَالِكُمْ وَلٰكِنْ يَنْظُرُ اِلٰى قُلُوْبِكُمْ وَاَعْمَالِكُمْ",bn:"নিশ্চয় আল্লাহ তাআলা তোমাদের দেহ ও আকার-আকৃতি দেখেন না; বরং তিনি তোমাদের অন্তর ও আমল দেখেন।",en:"Indeed, Allah does not look at your appearance or your wealth, but He looks at your hearts and your deeds.",ref:"মুসলিম: ২৫৬৪"},
+{n:162,cat:"কুফর",ar:"سِبَابُ الْمُسْلِمِ فُسُوْقٌ وَقِتَالُهُ كُفْرٌ",bn:"মুসলিমকে গালি দেওয়া পাপ, তার বিরুদ্ধে লড়াই করা কুফর।",en:"Insulting a Muslim is sinful (fusuq), and fighting him is disbelief (kufr).",ref:"বুখারি: ৪৮"},
+{n:163,cat:"আনুগত্য",ar:"لَا طَاعَةَ لِمَخْلُوْقٍ فِيْ مَعْصِيَةِ الْخَالِقِ",bn:"স্রষ্টার অবাধ্যতা করে সৃষ্টির আনুগত্য করা উচিত নয়।",en:"There is no obedience to a created being in disobedience to the Creator.",ref:"তাবারানি: ১৬৫"},
+{n:164,cat:"স্নেহ ও শ্রদ্ধা",ar:"لَيْسَ مِنَّا مَنْ لَمْ يَرْحَمْ صَغِيْرَنَا وَيَعْرِفْ شَرَفَ كَبِيْرِنَا",bn:"যে ব্যক্তি ছোটদের প্রতি স্নেহ আচরণ করে না, বড়দের প্রতি সম্মান দেখায় না, সে আমাদের দলভুক্ত নয়।",en:"He is not one of us who does not show mercy to our young ones and does not recognize the honor of our elders.",ref:"আবু দাউদ: ৪৯৪৩"},
+{n:165,cat:"বিনয়",ar:"مَنْ تَوَاضَعَ لِلّٰهِ رَفَعَهُ اللهُ",bn:"যে ব্যক্তি আল্লাহর জন্য বিনয় অবলম্বন করে, আল্লাহ তাকে সম্মানিত করেন।",en:"Whoever humbles himself for Allah's sake, Allah will raise him in status.",ref:"সহিহ জামি: ৬১৬২"},
+{n:166,cat:"অন্যের অনুকরণ",ar:"مَنْ تَشَبَّهَ بِقَوْمٍ فَهُوَ مِنْهُمْ",bn:"যে ব্যক্তি অন্য জাতির সাদৃশ্য অবলম্বন করবে, সে তাদের দলভুক্ত বলে বিবেচিত হবে।",en:"Whoever imitates a people is one of them.",ref:"আবু দাউদ: ৪০৩১"},
+{n:167,cat:"আমানত",ar:"اَدِّ الْاَمَانَةَ اِلٰى مَنِ ائْتَمَنَكَ وَلَا تَخُنْ مَنْ خَانَكَ",bn:"যে ব্যক্তি তোমার কাছে আমানত রেখেছে, তার আমানত যথাযথভাবে আদায় করে দাও এবং যে তোমার খেয়ানত করেছে, তুমি তার খেয়ানত করো না।",en:"Fulfill the trust for the one who entrusted you, and do not betray the one who betrays you.",ref:"তিরমিযী: ১২৬৪"},
+{n:168,cat:"প্রবেশে অনুমতি",ar:"اِذَا اسْتَاْذَنَ اَحَدُكُمْ ثَلَاثًا فَلَمْ يُؤْذَنْ لَهُ فَلْيَرْجِعْ",bn:"তিনবার অনুমতি চাওয়ার পরও সাড়া না পেলে, ঘরে প্রবেশ না করে ফিরে যাবে।",en:"If one of you seeks permission three times and is not granted permission, then let him return.",ref:"বুখারি: ৬২৪৫"},
+{n:169,cat:"কালিমা তাইয়েবা",ar:"مَنْ قَالَ لَا اِلٰهَ اِلَّا اللهُ دَخَلَ الْجَنَّةَ",bn:"যে ব্যক্তি 'লা ইলাহা ইল্লাল্লাহ' বলবে, সে জান্নাতে প্রবেশ করবে।",en:"Whoever says: 'There is no god but Allah,' will enter Paradise.",ref:"বুখারি: ২০"},
+{n:170,cat:"আল্লাহর সঙ্গ",ar:"اِنَّ اللهَ يَقُوْلُ اَنَا عِنْدَ ظَنِّ عَبْدِيْ بِيْ وَاَنَا مَعَهُ اِذَا دَعَانِيْ",bn:"আল্লাহ বলেন, আমার ব্যাপারে বান্দা যেমন ধারণা করে আমি তেমন আচরণ করি। বান্দা যখন আমাকে ডাকে, আমি তার ডাকে সাড়া দিই।",en:"Allah says: I am as My servant thinks of Me, and I am with him when he calls upon Me.",ref:"মুসলিম: ২৬৭৫"},
+{n:171,cat:"নেক কাজ",ar:"اِنَّ شَجَرَةً كَانَتْ تُؤْذِي الْمُسْلِمِيْنَ فَجَاءَ رَجُلٌ فَقَطَعَهَا فَدَخَلَ الْجَنَّةَ",bn:"রাস্তার পাশে একটি গাছ পথচারী মুসলিমদের কষ্ট দিচ্ছিল, এক ব্যক্তি এসে গাছটি কেটে ফেলল। তার বিনিময়ে মানুষটা জান্নাতে প্রবেশ করল।",en:"There was a tree that used to harm the Muslims, so a man came and cut it down, and he entered Paradise.",ref:"মুসলিম: ১৯১৪"},
+{n:172,cat:"আল্লাহর আযাব",ar:"اِنَّ اللهَ يُعَذِّبُ الَّذِيْنَ يُعَذِّبُوْنَ النَّاسَ فِي الدُّنْيَا",bn:"যারা দুনিয়াতে মানুষকে কষ্ট দেয়, আল্লাহ তাদেরকে শাস্তি দেন।",en:"Indeed, Allah will punish those who torture/torment people in this world.",ref:"মুসলিম: ২৬১৩"},
+{n:173,cat:"মীমাংসা",ar:"لَيْسَ الْكَذَّابُ الَّذِيْ يُصْلِحُ بَيْنَ النَّاسِ فَيَنْمِيْ خَيْرًا اَوْ يَقُوْلُ خَيْرًا",bn:"ওই ব্যক্তি মিথ্যুক নয়, যে মিথ্যা বলে হলেও লোকদের মধ্যে মীমাংসা করে, উভয় পক্ষকে ভালো কথা বলে, এক পক্ষ থেকে অপরকে ভালো কথা পৌঁছায়।",en:"A liar is not the one who seeks to reconcile between people by conveying good or saying good words.",ref:"বুখারি: ২৬৯২"},
+{n:174,cat:"জুলুম",ar:"اَلظُّلْمُ ظُلُمَاتٌ يَوْمَ الْقِيَامَةِ",bn:"জুলুম কেয়ামতের দিন অন্ধকার হয়ে দেখা দিবে।",en:"Oppression is darkness on the Day of Resurrection.",ref:"বুখারি: ২৪৪৭"},
+{n:175,cat:"রহমত",ar:"اِنِّيْ لَمْ اُبْعَثْ لَعَّانًا وَاِنَّمَا بُعِثْتُ رَحْمَةً",bn:"আমি অভিশাপদানকারী হিসেবে প্রেরিত হইনি, আমি রহমতস্বরূপ প্রেরিত হয়েছি।",en:"I was not sent as one who curses, rather I was sent as a mercy.",ref:"মুসলিম: ২৫৯৯"},
+{n:176,cat:"পরোপকার",ar:"مَنِ اسْتَطَاعَ مِنْكُمْ اَنْ يَنْفَعَ اَخَاهُ فَلْيَفْعَلْ",bn:"যার পক্ষে তার ভাইকে উপকার করা সম্ভব, সে যেন তা করে।",en:"Whoever among you is able to benefit his brother, let him do so.",ref:"মুসলিম: ২১৯৯"},
+{n:177,cat:"ইখলাস",ar:"اَخْلِصْ دِيْنَكَ يَكْفِكَ الْقَلِيْلُ مِنَ الْعَمَلِ",bn:"তোমার ঈমানকে (দ্বীনকে) খাঁটি করো, তবে অল্প আমলই তোমার নাজাতের জন্য যথেষ্ট হবে।",en:"Make your religion sincere (for Allah), and a little deed will suffice you.",ref:"মুস্তাদরাকে হাকিম: ৭৮৫১"},
+{n:178,cat:"সালাতের হিসাব",ar:"اَوَّلُ مَا يُحَاسَبُ بِهِ الْعَبْدُ يَوْمَ الْقِيَامَةِ الصَّلَاةُ",bn:"কেয়ামতের দিন বান্দার কাছ থেকে সর্বপ্রথম নামাযের হিসাব নেওয়া হবে।",en:"The first thing for which a servant will be held accountable on the Day of Resurrection is the prayer.",ref:"আবু দাউদ: ৮৬৪"},
+{n:179,cat:"আলেমের মর্যাদা",ar:"فَضْلُ الْعَالِمِ عَلَى الْعَابِدِ كَفَضْلِيْ عَلٰى اَدْنَاكُمْ",bn:"সাধারণ আবেদ (বে-ইলম ইবাদতকারী)-এর ওপর একজন আলেমের মর্যাদা তেমন, যেমন তোমাদের মধ্যে সবচেয়ে সাধারণ বা ছোট ব্যক্তির ওপর আমার মর্যাদা।",en:"The superiority of a scholar over a worshipper is like my superiority over the least of you.",ref:"তিরমিযী: ২৬৮৫"},
+{n:180,cat:"মিথ্যাচার",ar:"كَفٰى بِالْمَرْءِ كَذِبًا اَنْ يُحَدِّثَ بِكُلِّ مَا سَمِعَ",bn:"কোনো ব্যক্তি মিথ্যাবাদী হওয়ার জন্য এতটুকুই যথেষ্ট যে, সে যা শোনে (যাচাই না করে) তাই বলে বেড়ায়।",en:"It is enough of a lie for a person that he narrates everything he hears.",ref:"মুসলিম: ৫"},
+{n:181,cat:"বিদআত",ar:"كُلُّ بِدْعَةٍ ضَلَالَةٌ",bn:"প্রত্যেক বিদআত (দ্বীনের মধ্যে নতুন উদ্ভাবন) হলো পথভ্রষ্টতা।",en:"Every innovation (in religion) is misguidance.",ref:"মুসলিম: ৮৬৭"},
+{n:182,cat:"জান্নাত ও জাহান্নাম",ar:"مَنْ لَقِيَ اللهَ لَا يُشْرِكُ بِهِ شَيْئًا دَخَلَ الْجَنَّةَ وَمَنْ لَقِيَهُ يُشْرِكُ بِهِ دَخَلَ النَّارَ",bn:"যে ব্যক্তি শিরকমুক্ত অবস্থায় আল্লাহর সাথে সাক্ষাত করবে, সে সোজা জান্নাতে প্রবেশ করবে। যে ব্যক্তি শিরক করা অবস্থায় আল্লাহর সাথে সাক্ষাত করবে, সে সোজা জাহান্নামে যাবে।",en:"Whoever meets Allah without associating anything with Him will enter Paradise, and whoever meets Him while associating partners with Him will enter the Fire.",ref:"মুসলিম: ৯৩"},
+{n:183,cat:"মুমিনের পরীক্ষা",ar:"لَا تُصِيْبُ الْمُؤْمِنَ شَوْكَةٌ فَمَا فَوْقَهَا اِلَّا قَصَّ اللهُ بِهَا مِنْ خَطِيْئَتِهِ",bn:"কোনো ঈমানদার ব্যক্তির শরীরে একটি কাঁটা বিদ্ধ হলে কিংবা তার চাইতে বড় কোনো মুসীবত আপতিত হলে তার বিনিময়ে আল্লাহ তাআলা তার একটি গোনাহ মাফ করে দেন।",en:"No hardship befalls a believer—even a thorn's prick or anything greater—except that Allah removes some of his sins because of it.",ref:"মুসলিম: ২৫৭২"}
+];
+
+// ============ APP LOGIC ============
+let currentCat = "সব";
+let currentView = "all";
+let searchTerm = "";
+let favorites = JSON.parse(localStorage.getItem("nabijir_favs") || "[]");
+
+const bnNum = n => n.toString().replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
+
+// Update total count
+document.getElementById("totalCount").textContent = bnNum(hadiths.length);
+
+// Build category chips
+function buildChips() {
+    const cats = ["সব", ...new Set(hadiths.map(h => h.cat))];
+    const chipsEl = document.getElementById("chips");
+    chipsEl.innerHTML = cats.map(c =>
+        `<button class="chip ${c === currentCat ? 'active' : ''}" data-cat="${c}">${c}</button>`
+    ).join("");
+    chipsEl.querySelectorAll(".chip").forEach(chip => {
+        chip.onclick = () => {
+            currentCat = chip.dataset.cat;
+            buildChips();
+            render();
+        };
+    });
+}
+
+// Daily hadith (based on day of year)
+function getDailyHadith() {
+    const start = new Date(new Date().getFullYear(), 0, 0);
+    const diff = new Date() - start;
+    const dayOfYear = Math.floor(diff / 86400000);
+    return hadiths[dayOfYear % hadiths.length];
+}
+
+function renderDaily() {
+    const dc = document.getElementById("dailyContainer");
+    if (currentView === "all" && currentCat === "সব" && !searchTerm) {
+        const h = getDailyHadith();
+        dc.innerHTML = `
+        <div class="daily-card">
+            <span class="daily-label">☀️ আজকের হাদিস</span>
+            <div class="arabic">${h.ar}</div>
+            <div class="bn">${h.bn}</div>
+            <div class="ref">📚 ${h.ref}</div>
+        </div>`;
+    } else {
+        dc.innerHTML = "";
+    }
+}
+
+function toggleFav(n) {
+    const idx = favorites.indexOf(n);
+    if (idx > -1) {
+        favorites.splice(idx, 1);
+        showToast("প্রিয় তালিকা থেকে সরানো হয়েছে");
+    } else {
+        favorites.push(n);
+        showToast("প্রিয় তালিকায় যোগ হয়েছে ❤️");
+    }
+    localStorage.setItem("nabijir_favs", JSON.stringify(favorites));
+    render();
+}
+
+function showToast(msg) {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => t.classList.remove("show"), 2000);
+}
+
+function getFiltered() {
+    let list = hadiths;
+    if (currentView === "fav") {
+        list = list.filter(h => favorites.includes(h.n));
+    }
+    if (currentCat !== "সব") {
+        list = list.filter(h => h.cat === currentCat);
+    }
+    if (searchTerm) {
+        const t = searchTerm.toLowerCase();
+        list = list.filter(h =>
+            h.bn.toLowerCase().includes(t) ||
+            h.en.toLowerCase().includes(t) ||
+            h.cat.toLowerCase().includes(t) ||
+            h.ref.toLowerCase().includes(t) ||
+            bnNum(h.n).includes(searchTerm) ||
+            h.n.toString().includes(searchTerm)
+        );
+    }
+    return list;
+}
+
+function render() {
+    renderDaily();
+    const list = getFiltered();
+    const listEl = document.getElementById("hadithList");
+    const showing = document.getElementById("showingCount");
+    const viewLabel = document.getElementById("viewLabel");
+
+    let label = "সব হাদিস";
+    if (currentView === "fav") label = "প্রিয় হাদিস";
+    if (currentCat !== "সব") label = currentCat;
+    viewLabel.textContent = label;
+    showing.textContent = `${bnNum(list.length)}টি হাদিস`;
+
+    if (list.length === 0) {
+        listEl.innerHTML = `<div class="empty"><span>${currentView === 'fav' ? '💔' : '🔍'}</span>${currentView === 'fav' ? 'এখনো কোনো প্রিয় হাদিস যোগ করা হয়নি। হাদিসের ❤️ আইকনে চাপ দিয়ে প্রিয় তালিকায় যোগ করুন।' : 'কোনো হাদিস পাওয়া যায়নি।'}</div>`;
+        return;
+    }
+
+    listEl.innerHTML = list.map(h => `
+        <div class="hadith-card">
+            <div class="card-head">
+                <div class="num-badge">
+                    <span class="num-circle">${bnNum(h.n)}</span>
+                    <span class="cat-tag">${h.cat}</span>
                 </div>
-                <div class="p-6 sm:p-8 flex flex-col justify-between">
-                    <div>
-                        <span id="qv-category" class="text-[10px] font-bold text-gold-600 uppercase tracking-widest"></span>
-                        <h2 id="qv-title" class="text-2xl font-bold text-slate-950 tracking-tight mt-1 mb-2"></h2>
-                        <div class="flex items-center gap-1.5 mb-4 text-amber-500 text-xs">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                            <span class="text-gray-400 text-[11px] ml-1 font-medium">(4.9 audit track)</span>
-                        </div>
-                        <p id="qv-description" class="text-xs text-gray-500 font-light leading-relaxed mb-6"></p>
-                        
-                        <div class="flex items-baseline gap-3 mb-6">
-                            <span id="qv-price" class="text-2xl font-bold text-slate-950"></span>
-                            <span id="qv-old-price" class="text-sm text-gray-400 line-through"></span>
-                        </div>
-                    </div>
-
-                    <button id="qv-add-btn" class="w-full bg-slate-950 text-white text-sm font-semibold py-4 rounded-xl hover:bg-gold-600 tracking-wide transition-colors duration-300 shadow-md flex items-center justify-center gap-2">
-                        Add to System Deployment Array
-                    </button>
-                </div>
+                <button class="fav-btn ${favorites.includes(h.n) ? 'active' : ''}" onclick="toggleFav(${h.n})">${favorites.includes(h.n) ? '❤️' : '🤍'}</button>
             </div>
+            <div class="arabic-block">
+                <div class="arabic">${h.ar}</div>
+            </div>
+            <div class="bn-text">${h.bn}</div>
+            <div class="en-text">${h.en}</div>
+            <div class="ref-badge">📚 ${h.ref}</div>
+            ${h.note ? `<div class="note-text">${h.note}</div>` : ''}
         </div>
-    </div>
+    `).join("");
+}
 
-    <div id="wishlist-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/40 backdrop-blur-sm hidden">
-        <div class="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl">
-            <div class="flex items-center justify-between border-b border-gray-100 pb-4 mb-4">
-                <h3 class="font-bold text-lg flex items-center gap-2"><i class="fa-solid fa-heart text-amber-600"></i> Vault Architecture Wishlist</h3>
-                <button onclick="toggleWishlistModal()" class="text-gray-400 hover:text-slate-950"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div id="wishlist-items" class="space-y-4 max-h-60 overflow-y-auto scrollbar-hide">
-                <p class="text-xs text-gray-400 text-center py-6">Your system wishlist vault is entirely clear.</p>
-            </div>
-        </div>
-    </div>
+// Search
+document.getElementById("searchBox").addEventListener("input", e => {
+    searchTerm = e.target.value.trim();
+    render();
+});
 
-    <div id="success-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
-        <div class="bg-white rounded-3xl p-8 max-w-md w-full text-center shadow-2xl transform scale-95 transition-transform duration-300" id="success-panel">
-            <div class="w-20 h-20 bg-emerald-50 text-emerald-500 rounded-full flex items-center justify-center text-3xl mx-auto mb-6 border border-emerald-100 animate-bounce">
-                <i class="fa-solid fa-circle-check"></i>
-            </div>
-            <h3 class="text-2xl font-bold text-slate-950 tracking-tight mb-2">Settlement Dispatched</h3>
-            <p class="text-xs text-gray-500 leading-relaxed max-w-xs mx-auto mb-8">
-                Your automated transaction pipeline was processed successfully. Financial clearance authorized, and cargo tracking protocols initiated.
-            </p>
-            <div class="bg-gray-50 border border-gray-100 rounded-xl p-4 text-left text-xs mb-6 space-y-2">
-                <div class="flex justify-between"><span class="text-gray-400">Order Routing Key:</span><span class="font-mono font-bold text-slate-950">#AUR-88492-X</span></div>
-                <div class="flex justify-between"><span class="text-gray-400">Logistics ETA:</span><span class="text-slate-950 font-medium">48-72 Hours Insured Air Freight</span></div>
-            </div>
-            <button onclick="closeSuccessPipeline()" class="w-full bg-slate-950 text-white font-semibold py-3.5 rounded-xl hover:bg-gold-600 transition-colors duration-300">
-                Acknowledge & Close Environment
-            </button>
-        </div>
-    </div>
-
-
-    <script>
-        // Database Artifact Dataset Layer
-        const PRODUCT_DATABASE = [
-            { id: 1, name: "AeroForm Minimalist Parka", category: "Apparel", price: 185.00, oldPrice: 240.00, badge: "New", image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=600&q=80", desc: "Engineered with hydro-repellent micro-weave membranes, featuring modular structural pockets and dynamic ventilation architectures." },
-            { id: 2, name: "Studio-Pro ANC Headphones", category: "Electronics", price: 349.00, oldPrice: null, badge: "Limited", image: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=600&q=80", desc: "Pure high-fidelity resonance drivers combined with proactive hybrid cancellation frameworks. 60-hour power matrix." },
-            { id: 3, name: "Mag-Safe Obsidian Wallet", category: "Accessories", price: 75.00, oldPrice: 95.00, badge: "20% OFF", image: "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=600&q=80", desc: "Aerospace titanium armor sheets wrapped inside tailored full-grain aniline hide skin with shielding matrices." },
-            { id: 4, name: "Stratus Knit Ergonomic Runner", category: "Footwear", price: 160.00, oldPrice: null, badge: "Hot", image: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=600&q=80", desc: "Multi-density composite matrix outsoles combined with single-thread stretch-fused organic mesh wrappers." },
-            { id: 5, name: "Chronograph Horizon MK-IV", category: "Accessories", price: 580.00, oldPrice: 720.00, badge: "Elite", image: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=600&q=80", desc: "Automatic calibrated movement matrix operating inside a physical brushed carbon chassis casing structure." },
-            { id: 6, name: "Hyper-Lightweight Daypack 20L", category: "Accessories", price: 125.00, oldPrice: null, badge: "New", image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80", desc: "Waterproof ripstop composition, high-density distribution straps, engineered for seamless modular hardware layouts." },
-            { id: 7, name: "Linear Merino Turtleneck", category: "Apparel", price: 140.00, oldPrice: 165.00, badge: "Classic", image: "https://images.unsplash.com/photo-1614975058789-41316d0e2e9c?auto=format&fit=crop&w=600&q=80", desc: "100% fine micron extra-spun raw virgin Australian merino strands. Thermal regulating cellular layout." },
-            { id: 8, name: "Quantum True-Wireless Buds", category: "Electronics", price: 199.00, oldPrice: null, badge: "New", image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80", desc: "Bespoke internal sound stages, modular dynamic seals, dual atmospheric ambient mics built inline." }
-        ];
-
-        // Reactive Architecture Global State Arrays
-        let GlobalCart = [];
-        let GlobalWishlist = [];
-
-        // Application Lifecycles Initialize Action
-        document.addEventListener('DOMContentLoaded', () => {
-            renderProductGrid(PRODUCT_DATABASE);
-            initHeaderScrollEffects();
-            initCartDrawerControls();
-            initSearchEngine();
-            initMobileMenu();
-            initNewsletter();
-        });
-
-        // Dynamic Product Renderer Implementation
-        function renderProductGrid(items) {
-            const grid = document.getElementById('product-grid');
-            grid.innerHTML = '';
-            
-            if (items.length === 0) {
-                grid.innerHTML = `<div class="col-span-full text-center py-16 text-gray-400 text-sm font-light">No artifacts identified in this category tier configuration.</div>`;
-                return;
-            }
-
-            items.forEach(product => {
-                const isWished = GlobalWishlist.includes(product.id);
-                const heartClass = isWished ? 'fa-solid text-amber-600' : 'fa-regular';
-                const oldPriceUI = product.oldPrice ? `<span class="text-xs text-gray-400 line-through font-light">$${product.oldPrice.toFixed(2)}</span>` : '';
-                
-                const card = document.createElement('div');
-                card.className = "product-card group relative bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 flex flex-col justify-between transition-all duration-300 hover:shadow-md";
-                card.innerHTML = `
-                    <div class="relative overflow-hidden bg-gray-100 aspect-square cursor-pointer" onclick="openQuickView(${product.id})">
-                        <img src="${product.image}" alt="${product.name}" class="product-image w-full h-full object-cover object-center transition-transform duration-700 ease-out">
-                        <span class="absolute top-3 left-3 bg-slate-950 text-white text-[9px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-md shadow-sm">${product.badge}</span>
-                    </div>
-                    <div class="p-5 flex-grow flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-center justify-between gap-2 mb-1">
-                                <span class="text-[10px] font-bold text-gold-600 uppercase tracking-widest">${product.category}</span>
-                                <button onclick="toggleWishlist(${product.id}, this)" class="text-gray-400 hover:text-amber-600 transition-colors py-1 pl-2">
-                                    <i class="${heartClass} fa-heart text-sm"></i>
-                                </button>
-                            </div>
-                            <h3 class="text-sm font-semibold text-slate-950 tracking-tight cursor-pointer hover:text-gold-600 transition-colors" onclick="openQuickView(${product.id})">${product.name}</h3>
-                            <div class="flex items-center gap-1 mt-1.5 text-amber-500 text-[10px]">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between mt-5 pt-3 border-t border-gray-50">
-                            <div class="flex items-baseline gap-2">
-                                <span class="text-base font-bold text-slate-950">$${product.price.toFixed(2)}</span>
-                                ${oldPriceUI}
-                            </div>
-                            <button onclick="addToCartEngine(${product.id})" class="p-2.5 rounded-xl bg-slate-950 text-white text-xs hover:bg-gold-600 group-hover:px-4 transition-all duration-300 flex items-center gap-2">
-                                <i class="fa-solid fa-plus"></i><span class="hidden group-hover:inline font-semibold">Add</span>
-                            </button>
-                        </div>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
+// Bottom nav
+document.querySelectorAll(".nav-item").forEach(item => {
+    item.onclick = () => {
+        const view = item.dataset.view;
+        if (view === "about") {
+            document.getElementById("aboutModal").classList.add("show");
+            return;
         }
-
-        // Filtering Pipeline Infrastructure
-        function filterCategory(category) {
-            const filters = ['all', 'Apparel', 'Electronics', 'Accessories', 'Footwear'];
-            filters.forEach(f => {
-                const btn = document.getElementById(`filter-${f === 'all' ? 'all' : f.toLowerCase()}`);
-                if(btn) {
-                    btn.className = f === category ? 
-                        "px-5 py-2.5 rounded-full bg-slate-950 text-white shadow-sm transition-all duration-300" :
-                        "px-5 py-2.5 rounded-full bg-white text-slate-600 border border-gray-200 hover:border-slate-950 hover:text-slate-950 transition-all duration-300";
-                }
-            });
-
-            if (category === 'all') {
-                renderProductGrid(PRODUCT_DATABASE);
-            } else {
-                const subset = PRODUCT_DATABASE.filter(p => p.category === category);
-                renderProductGrid(subset);
-            }
+        document.querySelectorAll(".nav-item").forEach(i => i.classList.remove("active"));
+        item.classList.add("active");
+        currentView = view;
+        if (view === "daily") {
+            currentCat = "সব";
+            searchTerm = "";
+            document.getElementById("searchBox").value = "";
+            buildChips();
+            // Scroll to daily
+            const h = getDailyHadith();
+            const listEl = document.getElementById("hadithList");
+            document.getElementById("dailyContainer").innerHTML = `
+                <div class="daily-card">
+                    <span class="daily-label">☀️ আজকের হাদিস</span>
+                    <div class="arabic">${h.ar}</div>
+                    <div class="bn">${h.bn}</div>
+                    <div class="ref">📚 ${h.ref}</div>
+                </div>`;
+            listEl.innerHTML = "";
+            document.querySelector(".stats").style.display = "none";
+            window.scrollTo({top: 0, behavior: 'smooth'});
+            return;
         }
+        document.querySelector(".stats").style.display = "flex";
+        render();
+    };
+});
 
-        // Search Interface Handling Engine
-        function initSearchEngine() {
-            const input = document.getElementById('search-input');
-            input.addEventListener('input', (e) => {
-                const val = e.target.value.toLowerCase().trim();
-                if(val === '') {
-                    renderProductGrid(PRODUCT_DATABASE);
-                } else {
-                    const filtered = PRODUCT_DATABASE.filter(p => p.name.toLowerCase().includes(val) || p.category.toLowerCase().includes(val));
-                    renderProductGrid(filtered);
-                }
-            });
-        }
+function closeAbout() {
+    document.getElementById("aboutModal").classList.remove("show");
+}
+document.getElementById("aboutModal").onclick = e => {
+    if (e.target.id === "aboutModal") closeAbout();
+};
 
-        // Header Scrolling Dynamic Mechanics
-        function initHeaderScrollEffects() {
-            const header = document.querySelector('header');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 40) {
-                    header.classList.remove('top-8', 'mx-auto', 'max-w-7xl', 'rounded-2xl', 'my-2');
-                    header.classList.add('top-0', 'w-full', 'rounded-none', 'my-0', 'shadow-md');
-                } else {
-                    header.classList.add('top-8', 'mx-auto', 'max-w-7xl', 'rounded-2xl', 'my-2');
-                    header.classList.remove('top-0', 'w-full', 'rounded-none', 'my-0', 'shadow-md');
-                }
-            });
-        }
+// Theme toggle
+const themeBtn = document.getElementById("themeBtn");
+function applyTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+    themeBtn.textContent = theme === "dark" ? "☀️" : "🌙";
+    localStorage.setItem("nabijir_theme", theme);
+}
+themeBtn.onclick = () => {
+    const cur = document.documentElement.getAttribute("data-theme");
+    applyTheme(cur === "dark" ? "light" : "dark");
+};
+applyTheme(localStorage.getItem("nabijir_theme") || "light");
 
-        // Core JavaScript Cart State Application Engine
-        function addToCartEngine(id) {
-            const product = PRODUCT_DATABASE.find(p => p.id === id);
-            const position = GlobalCart.findIndex(item => item.id === id);
-
-            if (position > -1) {
-                GlobalCart[position].quantity += 1;
-            } else {
-                GlobalCart.push({ ...product, quantity: 1 });
-            }
-
-            updateCartSystemUI();
-            openCartDrawer();
-        }
-
-        function updateCartQuantity(id, modifier) {
-            const position = GlobalCart.findIndex(item => item.id === id);
-            if (position > -1) {
-                GlobalCart[position].quantity += modifier;
-                if (GlobalCart[position].quantity <= 0) {
-                    GlobalCart.splice(position, 1);
-                }
-                updateCartSystemUI();
-            }
-        }
-
-        function removeFromCart(id) {
-            GlobalCart = GlobalCart.filter(item => item.id !== id);
-            updateCartSystemUI();
-        }
-
-        function updateCartSystemUI() {
-            const countBadges = [document.getElementById('cart-count'), document.getElementById('cart-panel-count')];
-            const container = document.getElementById('cart-items-container');
-            const subtotalText = document.getElementById('cart-subtotal');
-
-            const totalUnits = GlobalCart.reduce((sum, item) => sum + item.quantity, 0);
-            countBadges.forEach(b => b.innerText = totalUnits);
-
-            if (GlobalCart.length === 0) {
-                container.innerHTML = `
-                    <div class="flex flex-col items-center justify-center h-64 text-center">
-                        <div class="text-gray-300 text-5xl mb-4"><i class="fa-solid fa-box-open"></i></div>
-                        <h4 class="text-slate-950 font-bold text-sm">Your allocation matrix is empty</h4>
-                        <p class="text-xs text-gray-400 mt-1 max-w-[200px]">Incorporate items from the primary featured vault index.</p>
-                    </div>
-                `;
-                subtotalText.innerText = "$0.00";
-                return;
-            }
-
-            container.innerHTML = '';
-            let runningSum = 0;
-
-            GlobalCart.forEach(item => {
-                runningSum += item.price * item.quantity;
-                const row = document.createElement('div');
-                row.className = "flex items-center gap-4 py-4 border-b border-gray-50 last:border-0";
-                row.innerHTML = `
-                    <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-xl object-cover bg-gray-100 flex-shrink-0">
-                    <div class="flex-grow min-w-0">
-                        <h4 class="text-xs font-semibold text-slate-950 truncate">${item.name}</h4>
-                        <p class="text-[11px] text-gold-600 font-medium tracking-wider mt-0.5">${item.category}</p>
-                        <div class="flex items-center justify-between mt-2">
-                            <div class="flex items-center border border-gray-200 rounded-lg bg-white overflow-hidden">
-                                <button onclick="updateCartQuantity(${item.id}, -1)" class="px-2 py-1 text-xs hover:bg-gray-100 transition-colors text-gray-500"><i class="fa-solid fa-minus text-[9px]"></i></button>
-                                <span class="px-2 text-xs font-mono font-bold text-slate-950 text-center min-w-[24px]">${item.quantity}</span>
-                                <button onclick="updateCartQuantity(${item.id}, 1)" class="px-2 py-1 text-xs hover:bg-gray-100 transition-colors text-gray-500"><i class="fa-solid fa-plus text-[9px]"></i></button>
-                            </div>
-                            <span class="text-xs font-bold text-slate-950">$${(item.price * item.quantity).toFixed(2)}</span>
-                        </div>
-                    </div>
-                    <button onclick="removeFromCart(${item.id})" class="text-gray-300 hover:text-rose-600 transition-colors p-2"><i class="fa-solid fa-trash-can text-sm"></i></button>
-                `;
-                container.appendChild(row);
-            });
-
-            subtotalText.innerText = `$${runningSum.toFixed(2)}`;
-        }
-
-        // Cart Drawer Animations & Toggles System
-        function initCartDrawerControls() {
-            const drawer = document.getElementById('cart-drawer');
-            const overlay = document.getElementById('cart-overlay');
-            const panel = document.getElementById('cart-panel');
-            const openBtn = document.getElementById('cart-btn');
-            const closeBtn = document.getElementById('cart-close-btn');
-            const continueBtn = document.getElementById('cart-continue-shopping');
-
-            function open() {
-                drawer.classList.remove('hidden');
-                setTimeout(() => {
-                    overlay.classList.remove('opacity-0');
-                    panel.classList.remove('translate-x-full');
-                }, 10);
-            }
-
-            function close() {
-                overlay.classList.add('opacity-0');
-                panel.classList.add('translate-x-full');
-                setTimeout(() => {
-                    drawer.classList.add('hidden');
-                }, 300);
-            }
-
-            openBtn.addEventListener('click', open);
-            closeBtn.addEventListener('click', close);
-            overlay.addEventListener('click', close);
-            continueBtn.addEventListener('click', close);
-            window.openCartDrawer = open;
-        }
-
-        // Product Quick View Architecture Systems
-        function openQuickView(id) {
-            const target = PRODUCT_DATABASE.find(p => p.id === id);
-            if(!target) return;
-
-            document.getElementById('qv-image').src = target.image;
-            document.getElementById('qv-badge').innerText = target.badge;
-            document.getElementById('qv-category').innerText = target.category;
-            document.getElementById('qv-title').innerText = target.name;
-            document.getElementById('qv-description').innerText = target.desc;
-            document.getElementById('qv-price').innerText = `$${target.price.toFixed(2)}`;
-            document.getElementById('qv-old-price').innerText = target.oldPrice ? `$${target.oldPrice.toFixed(2)}` : '';
-            
-            const btn = document.getElementById('qv-add-btn');
-            btn.onclick = () => {
-                addToCartEngine(target.id);
-                closeQuickView();
-            };
-
-            const modal = document.getElementById('quickview-modal');
-            const panel = document.getElementById('quickview-panel');
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                modal.classList.remove('opacity-0');
-                panel.classList.remove('scale-95');
-            }, 10);
-        }
-
-        function closeQuickView() {
-            const modal = document.getElementById('quickview-modal');
-            const panel = document.getElementById('quickview-panel');
-            modal.classList.add('opacity-0');
-            panel.classList.add('scale-95');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 300);
-        }
-
-        // Vault Wishlist Mechanics Lifecycle 
-        function toggleWishlist(id, btnNode) {
-            const spot = GlobalWishlist.indexOf(id);
-            if (spot > -1) {
-                GlobalWishlist.splice(spot, 1);
-            } else {
-                GlobalWishlist.push(id);
-            }
-            
-            // Sync current template node instance locally instantly
-            const icon = btnNode.querySelector('i');
-            if (GlobalWishlist.includes(id)) {
-                icon.className = "fa-solid fa-heart text-sm text-amber-600 animate-ping";
-                setTimeout(() => icon.className = "fa-solid fa-heart text-sm text-amber-600", 200);
-            } else {
-                icon.className = "fa-regular fa-heart text-sm text-gray-400";
-            }
-            
-            // Update total structural components metrics
-            const countNode = document.getElementById('wishlist-count');
-            countNode.innerText = GlobalWishlist.length;
-            if(GlobalWishlist.length > 0) {
-                countNode.classList.remove('scale-0');
-            } else {
-                countNode.classList.add('scale-0');
-            }
-            buildWishlistUI();
-        }
-
-        function buildWishlistUI() {
-            const target = document.getElementById('wishlist-items');
-            if(GlobalWishlist.length === 0) {
-                target.innerHTML = `<p class="text-xs text-gray-400 text-center py-6">Your system wishlist vault is entirely clear.</p>`;
-                return;
-            }
-            target.innerHTML = '';
-            GlobalWishlist.forEach(id => {
-                const item = PRODUCT_DATABASE.find(p => p.id === id);
-                const block = document.createElement('div');
-                block.className = "flex items-center justify-between gap-4 py-2 border-b border-gray-50 last:border-0";
-                block.innerHTML = `
-                    <div class="flex items-center gap-3">
-                        <img src="${item.image}" class="w-10 h-10 rounded-lg object-cover">
-                        <div>
-                            <h5 class="text-xs font-bold text-slate-950 truncate max-w-[180px]">${item.name}</h5>
-                            <span class="text-[10px] text-gray-400 font-mono">$${item.price.toFixed(2)}</span>
-                        </div>
-                    </div>
-                    <button onclick="addToCartEngine(${item.id}); toggleWishlistModal();" class="text-[10px] uppercase font-bold text-slate-950 hover:text-gold-600 transition-colors"><i class="fa-solid fa-bag-shopping"></i> Move</button>
-                `;
-                target.appendChild(block);
-            });
-        }
-
-        function toggleWishlistModal() {
-            const m = document.getElementById('wishlist-modal');
-            m.classList.toggle('hidden');
-        }
-
-        // Mobile Responsive Navigation Handlers
-        function initMobileMenu() {
-            const wrapper = document.getElementById('mobile-menu');
-            const openBtn = document.getElementById('mobile-menu-btn');
-            const closeBtn = document.getElementById('mobile-menu-close');
-
-            openBtn.addEventListener('click', () => wrapper.classList.remove('hidden'));
-            closeBtn.addEventListener('click', () => wrapper.classList.add('hidden'));
-            wrapper.addEventListener('click', (e) => { if(e.target === wrapper) wrapper.classList.add('hidden'); });
-        }
-
-        // Simulated Checkout Pipeline Operations 
-        function triggerCheckoutPipeline() {
-            if(GlobalCart.length === 0) return;
-            
-            // Terminate Cart drawer panel structures natively
-            document.getElementById('cart-close-btn').click();
-            
-            // Execute simulation environment interface launch scripts
-            const modal = document.getElementById('success-modal');
-            const panel = document.getElementById('success-panel');
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                modal.classList.remove('opacity-0');
-                panel.classList.remove('scale-95');
-            }, 50);
-        }
-
-        function closeSuccessPipeline() {
-            const modal = document.getElementById('success-modal');
-            const panel = document.getElementById('success-panel');
-            modal.classList.add('opacity-0');
-            panel.classList.add('scale-95');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                // Flush persistent cart state fields
-                GlobalCart = [];
-                updateCartSystemUI();
-                renderProductGrid(PRODUCT_DATABASE);
-            }, 300);
-        }
-
-        // Newsletter validation logic array
-        function initNewsletter() {
-            document.getElementById('newsletter-form').addEventListener('submit', (e) => {
-                e.preventDefault();
-                document.getElementById('newsletter-email').value = '';
-                const feedback = document.getElementById('newsletter-success');
-                feedback.classList.remove('hidden');
-                setTimeout(() => feedback.classList.add('hidden'), 6000);
-            });
-        }
-    </script>
+// Init
+buildChips();
+render();
+</script>
 </body>
-                        </html>
+    </html>
